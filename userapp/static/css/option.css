@@ -1,0 +1,74 @@
+
+    body, html {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+    }
+    .form-container {
+    background-color: rgba(255, 255, 255, 0.85); /* Increased transparency for a cleaner look */
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow effect */
+    width: 60%;
+    max-width: 450px;
+    margin: 50px auto;
+    text-align: center;
+}
+    .form-data{
+        text-align: center;
+    }
+
+    .content-wrapper {
+        flex: 1;
+        display: center;
+        align-items: center;  /* Centers form vertically */
+        justify-content: center; /* Centers form horizontally */
+    }
+
+    /* .container {
+        background: rgb(22, 21, 21);
+        padding: 30px;
+        width: 350px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        text-align: center;
+    } */
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        font-size: 16px;
+        color: white;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-company {
+        background-color: #f4c542;
+        align:center;
+    }
+
+    .btn-alumni {
+        background-color: #f4c542;
+    }
+
+    .btn-user {
+        background-color: #f4c542;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+    .wrapper{
+        background-image: url("../img/m1.jpeg.jpg");
+    }

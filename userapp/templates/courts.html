@@ -1,0 +1,36 @@
+{% load static %}
+{% include 'header.html' %}
+<link rel="stylesheet" href="{% static 'css/lawyers.css' %}">
+<body>
+    <h2><center><u>Court List</u></center></h2>
+    <table>
+        <tr>
+            <th>Sl No</th>
+            <th>UserName</th>
+            <th>E-mail</th>
+            <th>Court Jurisdiction</th>
+            <th>Court Type</th>
+            <th>Place</th>
+            <th>Actions</th>
+        </tr>
+        {% if users %}
+            {% for user in users %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.court_jurisdiction }}</td>
+                <td>{{ user.court_type }}</td>
+                <td>{{ user.place }}</td>
+                <td><button><div class="delete-btn"><a href="{% url 'delete_court' user.id %}">Delete</a></div></button></td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="7" style="text-align: center;">No users found.</td>
+            </tr>
+        {% endif %}
+    </table>
+</body>
+</html>
+{% include 'footer1.html' %}

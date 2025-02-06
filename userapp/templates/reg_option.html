@@ -1,0 +1,27 @@
+{% load static %}
+{% include 'header.html' %}
+<link rel="stylesheet" href="{% static 'css/option.css' %}">
+
+<body>
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="form-container">
+            <h2><u>Register As</u></h2>
+            <form>
+                <div class="form-data"></div>
+                <a href="/reg" class="btn btn-user">User</a>
+                <a href="/lawyer_reg" class="btn btn-company">Lawyer</a>
+                <!-- <a href="/alumini_reg" class="btn btn-alumni">Alumni</a> -->
+                
+            </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+    <!-- Footer stays aligned properly -->
+    <div>
+        {% include 'footer.html' %}
+    </div>
+</body>

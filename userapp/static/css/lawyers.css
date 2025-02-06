@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    margin: 20px auto;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin: 20px auto; /* Center the table */
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #dddddd;
+    font-size: 14px;
+}
+
+th {
+    background-color: #aa9166;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #eef4f8;
+}
+
+/* Styling for Delete Button */
+.delete-btn {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #c9302c;
+}
+
+/* Responsive Table */
+@media screen and (max-width: 768px) {
+    table {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+    }
+
+    th, td {
+        padding: 10px;
+        font-size: 13px;
+    }
+}

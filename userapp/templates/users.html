@@ -1,0 +1,34 @@
+{% load static %}
+{% include 'header.html' %}
+<link rel="stylesheet" href="{% static 'css/users.css' %}">
+<body>
+    <h2><center><u>Users List</u></center></h2>
+    <table>
+        <tr>
+            <th>Sl No</th>
+            <th>Name</th>
+            <th>UserName</th>
+            <th>E-mail</th>
+            <th>Phone NO</th>
+            <th>Actions</th>
+        </tr>
+        {% if users %}
+            {% for user in users %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td><button><div class="delete-btn"><a href="{% url 'delete_user' user.id %}">Delete</a></div></button></td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="7" style="text-align: center;">No users found.</td>
+            </tr>
+        {% endif %}
+    </table>
+</body>
+</html>
+{% include 'footer.html' %}

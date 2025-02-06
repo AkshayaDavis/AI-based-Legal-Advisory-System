@@ -1,0 +1,150 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>AdviZe - Legal Advisory Website</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Law Firm Website Template" name="keywords">
+        <meta content="Law Firm Website Template" name="description">
+
+        <!-- Favicon -->
+        <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,600;1,700;1,800&family=Roboto:wght@400;500&display=swap" rel="stylesheet"> 
+        
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+        <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <!-- Top Bar Start -->
+            <div class="top-bar">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <h1>AdviZe</h1>
+                                    <!-- <img src="{% static 'img/icon1.jpg' %}" alt="Logo"> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="top-bar-right">
+                                <!-- <div class="text">
+                                    <h2>8:00 AM - 9:00 PM</h2>
+                                    <p>Opening Hour Sun - Sat</p>
+                                </div> -->
+                                <div class="text">
+                                    <h4>+91 8848327389</h4>
+                                    <p>Call Us For Free Consultation</p>
+                                </div>
+                                <div class="social">
+                                    <a href=""><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Top Bar End -->
+
+            <!-- Nav Bar Start -->
+            <div class="nav-bar">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                        <a href="#" class="navbar-brand">MENU</a>
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            {% if request.session.ut == 'user' %}
+                            <div class="navbar-nav mr-auto">
+                                <a href="/" class="nav-item nav-link ">Home</a>
+                                <a href="/about" class="nav-item nav-link">About</a>
+                                <a href="/service" class="nav-item nav-link">Practice</a>
+                                <a href="/team" class="nav-item nav-link">Attorneys</a>
+                                <a href="/contact" class="nav-item nav-link">Contact</a>
+                                <a href="/profile" class="nav-item nav-link">My Profile</a>
+                                <a href="/user_logout" class="nav-item nav-link">LogOut</a>
+                            </div>
+
+                            {% elif request.session.ut == 'admin' %}
+                            <div class="navbar-nav mr-auto">
+                                <a href="/" class="nav-item nav-link ">Home</a>
+                                <!-- Add Court Dropdown Menu -->
+                                <a href="#" class="nav-item nav-link dropdown-toggle" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Court
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="/court_reg">Add Court</a>
+                                    <a class="dropdown-item" href="/view_court">View Courts</a>
+                                </div>
+                                <a href="/view_user" class="nav-item nav-link">View Users</a>
+                                <a href="/view_lawyer" class="nav-item nav-link">View Lawyers</a>
+                                <a href="/user_logout" class="nav-item nav-link">Logout</a>
+                                
+                                <!-- <a href="/service" class="nav-item nav-link">Practice</a>
+                                <a href="/team" class="nav-item nav-link">Attorneys</a>
+                                <a href="/contact" class="nav-item nav-link">Contact</a> -->
+                            </div>
+
+                            {% elif request.session.ut == 'lawyer' %}
+                            <div class="navbar-nav mr-auto">
+                                <a href="/" class="nav-item nav-link ">Home</a>
+                                <a href="/about" class="nav-item nav-link">About</a>
+                                <a href="/lawyer_profile" class="nav-item nav-link">My Profile</a>
+                                <!-- <a href="/view_user" class="nav-item nav-link">View Users</a> -->
+                                <a href="/user_logout" class="nav-item nav-link">Logout</a>
+                                
+                                <!-- <a href="/service" class="nav-item nav-link">Practice</a>
+                                <a href="/team" class="nav-item nav-link">Attorneys</a>
+                                <a href="/contact" class="nav-item nav-link">Contact</a> -->
+                            </div>
+
+                            {% else %}
+                            <div class="navbar-nav mr-auto">
+                                <a href="/" class="nav-item nav-link ">Home</a>
+                                <a href="/about" class="nav-item nav-link">About</a>
+                                <a href="/service" class="nav-item nav-link">Practice</a>
+                                <a href="/team" class="nav-item nav-link">Attorneys</a>
+                                <a href="/contact" class="nav-item nav-link">Contact</a>
+                            </div>
+                            {% endif %}
+                            <!-- <div class="ml-auto">
+                                <a><h2>Trust the process</h2></a>
+                            </div> -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- Nav Bar End -->
+            
+            {% if messages %}
+      <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              {% for message in messages %}
+                  {% if 'success' in message.tags %}
+                      alert("✅ {{ message|escapejs }}");
+                  {% endif %}
+                  {% if 'error' in message.tags %}
+                      alert("❌ {{ message|escapejs }}");
+                  {% endif %}
+              {% endfor %}
+          });
+      </script>
+  {% endif %}

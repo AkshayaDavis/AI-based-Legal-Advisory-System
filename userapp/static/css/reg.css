@@ -1,0 +1,103 @@
+
+        h2 {
+            color: #f4c542; /* Gold heading */
+            font-size: 1.5rem; /* Smaller font size */
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        form {
+            background-color: #1e1e1e; /* Slightly lighter dark background */
+            border-radius: 10px;
+            width: 150%;
+            max-width: 600px; /* Smaller form width */
+            padding: 15px; /* Reduced padding */
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6); /* Subtle shadow for depth */
+            margin-top: 30px; /* Top margin for spacing */
+            margin-left: auto;
+            margin-right: auto;
+            height: max-content;
+        }
+
+        form button {
+            width: 100%;
+            padding: 10px; /* Reduced padding */
+            background-color: #f4c542; /* Gold button */
+            color: #1c1c1c; /* Dark text for contrast */
+            font-weight: bold;
+            font-size: 0.9rem; /* Smaller font size */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #d9a837; /* Darker gold on hover */
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        form p {
+            margin-bottom: 10px; /* Reduced spacing between form elements */
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px; /* Reduced padding */
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333; /* Dark input background */
+            color: #fff;
+            font-size: 0.9rem; /* Smaller font size */
+            margin-bottom: 10px; /* Reduced margin between inputs */
+        }
+
+        form input:focus {
+            outline: none;
+            border-color: #f4c542; /* Gold border on focus */
+            background-color: #2a2a2a;
+        }
+
+        .message {
+            margin-bottom: 10px; /* Reduced spacing */
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 0.8rem; /* Smaller font for messages */
+        }
+        label{
+            color: #f4c542;
+        }
+
+        .success {
+            background-color: #28a745; /* Green background for success */
+            color: #fff;
+        }
+
+        .error {
+            background-color: #dc3545; /* Red background for error */
+            color: #fff;
+        }
+
+        .log-link {
+            position: relative; /* Position footer relative to the page */
+            bottom: 10px; /* Place it at the bottom */
+            text-align: center;
+            width: 100%; /* Center align content across the page */
+            font-size: 0.8rem; /* Smaller footer text */
+            color: #f4c542;
+            margin-top: 20px;
+        }
+
+        .log-link a {
+            color: #f4c542;
+            text-decoration: none;
+        }
+
+        .log-link a:hover {
+            text-decoration: underline;
+        }
+
+        .wrapper{
+            background-image: url("../img/m2.jpg");
+        }

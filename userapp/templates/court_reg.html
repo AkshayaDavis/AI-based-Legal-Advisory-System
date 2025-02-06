@@ -1,0 +1,16 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/reg.css' %}">
+<body>
+    <div class="register-container">
+        <form action="" method="POST" enctype="multipart/form-data">
+            <h2>{{ title }}</h2>
+            {% csrf_token %}
+            {{ form.as_p }} 
+            <button type="submit">{{ button }}</button>
+        </form>   
+    </div>
+</body>
+{% include 'footer.html' %}
+

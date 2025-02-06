@@ -1,0 +1,54 @@
+{% load static %}
+{% include 'header.html' %}
+<link rel="stylesheet" href="{% static 'css/profile1.css' %}">
+<body>
+    <h2><center><u>My Profile</u></center></h2>
+    <div class="profile-card">
+        
+        {% if user.image %}
+        <img src="{{ user.image.url }}" alt="User Profile Picture">
+        {% else %}
+        <img src="{% static 'img/img1.jpeg' %}" alt="User Profile Picture">
+        {% endif %}
+        
+        <h2>{{ user.username }}</h2>
+        <p>{{ user.first_name }}</p>
+        <p>{{ user.qualification }}</p>
+        {% if user.specialization %}
+            <p>Specialized in {{ user.specialization }} law</p>
+        {% endif %}
+
+        {% if user.bio %}
+            <p>{{ user.bio }}</p>
+        {% endif %}
+
+        {% if user.address %}
+            <p>{{ user.address }}</p>
+        {% endif %}
+
+        <p>{{ user.email }}</p>
+        <p>{{ user.phone }}</p>
+
+        {% if user.barcouncil_number %}
+            <p>Bar Council Number - {{ user.barcouncil_number }}</p>
+        {% endif %}
+
+        {% if user.experience %}   
+            <p>Experience - {{ user.experience }} </p>
+        {% endif %}
+
+        {% if user.availability_from %}
+           {% if user.availability_to %} 
+                <p>Available Timings: {{ user.availability_from }} - {{ user.availability_to }}</p>
+            {% endif %}
+        {% endif %}
+
+        <div class="info">
+            
+        </div>
+        <a href="/edit_lawyer_profile" class="edit-button">Edit Profile</a>
+    </div>
+</body>
+</html>
+
+{% include 'footer1.html' %}
