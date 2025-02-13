@@ -1,0 +1,169 @@
+
+
+
+lawyer {
+    margin-bottom: 20px;
+}
+
+.lawyercontainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 5px; /* Minimal gap between cards */
+    justify-items: center; /* Centers individual cards */
+    align-items: start; /* Ensures they start from the top */
+    padding: 5px; /* Reduce padding */
+    width: 100%;
+    max-width: 1100px; /* Prevents excessive spacing */
+    margin: 0 auto; /* Centers the container */
+}
+
+.lawyer-profile-card {
+    width: 100%; /* Ensures responsiveness */
+    max-width: 320px; /* Adjust width slightly */
+    padding: 8px; /* Reduce padding */
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Lighter shadow */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0; /* Remove unnecessary spacing */
+}
+
+
+.lawyer-profile-card:hover {
+    transform: scale(1.1); /* Zoom in effect */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    z-index: 10; /* Ensures the hovered profile is above others */
+}
+
+
+.lawyer-profile-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid  #fe5d37;
+}
+
+.lawyer-status-indicator {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    width: 15px; /* Adjust size of the dot */
+    height: 15px;
+    background-color: green; /* Green dot for active users */
+    border-radius: 50%;
+    border: 2px solid white; /* Adds a border for better visibility */
+}
+
+.lawyer-profile-card h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+}
+.lawyer-profile-card p {
+    color: brown;
+    font-size: 14px;
+    margin: 5px 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.lawyer-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 5px;
+    font-size: 14px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.lawyer-follow-btn {
+    background-color: #4CAF50;
+}
+.lawyer-follow-btn:hover {
+    background-color: #45a049;
+}
+.lawyer-message-btn {
+    background-color: #fe5d37;
+}
+.lawyer-message-btn:hover {
+    background-color: #fe5d37;
+}
+
+.wrapper{
+    background-image: url("../img/mg2.jpg");
+}
+
+
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.search-container input {
+    width: 400px;
+    padding: 8px 12px;
+    border: 2px solid #0c0c0b;
+    border-radius: 20px;
+    outline: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.search-container input:focus {
+    border-color: #050505;
+    box-shadow: 0px 0px 8px rgba(254, 93, 55, 0.5);
+}
+
+.search-container button {
+    padding: 8px 50px;
+    margin-left: 8px;
+    border: none;
+    background-color: #0c0b0b;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.search-container button:hover {
+    background-color: #070707;
+}
+
+.see-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.see-more-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fe5d37;
+    border: 2px solid #fe5d37;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.see-more-button:hover {
+    background-color: #fe5d37;
+    color: white;
+}
+
+/* Add arrow after the text */
+.see-more-button::after {
+    content: " →";
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.see-more-button:hover::after {
+    margin-left: 5px;
+}

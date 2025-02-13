@@ -13,7 +13,9 @@
         
         <h2>{{ user.username }}</h2>
         <p>{{ user.first_name }}</p>
-        <p>{{ user.qualification }}</p>
+        {% if user.qualification %}
+            <p>{{ user.qualification }}</p>
+        {% endif %}
         {% if user.specialization %}
             <p>Specialized in {{ user.specialization }} law</p>
         {% endif %}

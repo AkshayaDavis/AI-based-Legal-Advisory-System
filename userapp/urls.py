@@ -41,4 +41,14 @@ urlpatterns = [
     path('view_court',views.view_court,name="view_court"),
 
     path('delete_court/<int:id>/',views.delete_court,name="delete_court"),
+
+    path('lawyer_profileview',views.lawyer_profileview,name="lawyer_profileview"),
+
+    path('court_profile',views.court_profile,name="court_profile"),
+
+    path('edit_court_profile',views.edit_court_profile,name="edit_court_profile"),
+
+    path('all_lawyers',views.all_lawyers,name="all_lawyers"),
+
+
 ]

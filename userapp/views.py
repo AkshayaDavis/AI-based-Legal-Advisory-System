@@ -7,10 +7,16 @@ from .forms import *
 from django.conf import settings
 from django.core.mail import send_mail 
 import secrets,string
+from django.db.models import Q
+from django.db.models import Min
 
 
 def index(request):
-    return render(request, 'index.html')
+    if request.session.get('ut') == 'user':
+        lawyers = Register.objects.filter(usertype="lawyer")
+        return render(request, 'index.html', {'lawyers': lawyers})
+    else:
+        return render(request, 'index.html')
 
 def about(request):
     return render(request, 'about.html')
@@ -285,3 +291,52 @@ def delete_court(request,id):
     user.delete()
     messages.success(request,'court deleted successfully',extra_tags='success')
     return redirect('view_court')
+
+
+def lawyer_profileview(request):
+    query = request.GET.get('q', '')  # Get search query
+    lawyers = Register.objects.filter(usertype="lawyer")  # Filter only lawyers
+
+    if query:
+        # Apply search filters
+        lawyers = lawyers.filter(
+            Q(first_name__icontains=query) |
+            Q(specialization__icontains=query) |
+            Q(qualification__icontains=query) |
+            Q(username__icontains=query)
+        )
+    else:
+        # Select one lawyer per specialization (minimum ID per specialization)
+        specializations = Register.objects.filter(usertype="lawyer").values('specialization').annotate(min_id=Min('id'))
+        lawyer_ids = [entry['min_id'] for entry in specializations]
+        lawyers = Register.objects.filter(id__in=lawyer_ids)
+
+    return render(request, 'lawyer_profileview.html', {'lawyers': lawyers})
+
+
+
+def all_lawyers(request):
+    lawyers = Register.objects.filter(usertype="lawyer") 
+    return render(request, 'all_lawyers.html', {'lawyers': lawyers})
+
+
+
+def court_profile(request):
+    user=request.user
+    user=Register.objects.get(id=user.id)
+    return render(request, 'court_profile.html',{'user':user})
+
+def edit_court_profile(request):
+    if request.method == 'POST':
+        form = EditCourtProfileForm(request.POST,request.FILES, instance=request.user)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Prevent user from being logged out
+            messages.success(request, "Profile updated successfully.", extra_tags="success")
+            return redirect('court_profile')  # Redirect to the profile page
+        else:
+            messages.error(request, "Profile update failed. Please check your form.", extra_tags="error")
+    else:
+        form = EditCourtProfileForm(instance=request.user)
+
+    return render(request, 'court_reg.html', {'form': form,'title':'Edit Profile','button':'Update'})

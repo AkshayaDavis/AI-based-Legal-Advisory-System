@@ -1,8 +1,8 @@
 {% load static %}
 {% include 'header.html' %}
-
-<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'css/profile1.css' %}">
 <body>
+    <h2><center><u>Profile</u></center></h2>
     <div class="profile-card">
         
         {% if user.image %}
@@ -12,14 +12,15 @@
         {% endif %}
         
         <h2>{{ user.username }}</h2>
-        <p>{{ user.first_name }}</p>
         <p>{{ user.email }}</p>
-        <p>{{ user.phone }}</p>
+        <p>{{ user.court_type }}</p>
+        <p>{{ user.court_jurisdiction }}</p>
+        <p>{{ user.place  }}</p>
 
         <div class="info">
             
         </div>
-        <a href="/edit_profile" class="edit-button">Edit Profile</a>
+        <a href="/edit_court_profile" class="edit-button">Edit Profile</a>
     </div>
 </body>
 </html>

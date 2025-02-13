@@ -77,7 +77,6 @@
                                 <a href="/" class="nav-item nav-link ">Home</a>
                                 <a href="/about" class="nav-item nav-link">About</a>
                                 <a href="/service" class="nav-item nav-link">Practice</a>
-                                <a href="/team" class="nav-item nav-link">Attorneys</a>
                                 <a href="/contact" class="nav-item nav-link">Contact</a>
                                 <a href="/profile" class="nav-item nav-link">My Profile</a>
                                 <a href="/user_logout" class="nav-item nav-link">LogOut</a>
@@ -116,13 +115,27 @@
                                 <a href="/contact" class="nav-item nav-link">Contact</a> -->
                             </div>
 
+                            {% elif request.session.ut == 'court' %}
+                            <div class="navbar-nav mr-auto">
+                                <a href="/" class="nav-item nav-link ">Home</a>
+                                <a href="/about" class="nav-item nav-link">About</a>
+                                <a href="/court_profile" class="nav-item nav-link">My Profile</a>
+                                <!-- <a href="/view_user" class="nav-item nav-link">View Users</a> -->
+                                <a href="/user_logout" class="nav-item nav-link">Logout</a>
+                                
+                                <!-- <a href="/service" class="nav-item nav-link">Practice</a>
+                                <a href="/team" class="nav-item nav-link">Attorneys</a>
+                                <a href="/contact" class="nav-item nav-link">Contact</a> -->
+                            </div>
+
                             {% else %}
                             <div class="navbar-nav mr-auto">
                                 <a href="/" class="nav-item nav-link ">Home</a>
                                 <a href="/about" class="nav-item nav-link">About</a>
+                                
                                 <a href="/service" class="nav-item nav-link">Practice</a>
-                                <a href="/team" class="nav-item nav-link">Attorneys</a>
                                 <a href="/contact" class="nav-item nav-link">Contact</a>
+                                
                             </div>
                             {% endif %}
                             <!-- <div class="ml-auto">

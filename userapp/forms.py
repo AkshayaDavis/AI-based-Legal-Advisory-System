@@ -173,7 +173,6 @@ class LawyerRegisterForm(forms.ModelForm):
             'barcouncil_number': forms.TextInput(attrs={
                 'id': 'barcouncil_number',
                 'name': 'barcouncil_number',
-                'placeholder': 'Bar Council Number',
                 'pattern': '[A-Z]{2}/\d{4}/\d{4}',  # Example: UP/1234/2022
                 'title': 'Format: XX/1234/2022 (State Code / Serial Number / Year)'
             }),
@@ -243,7 +242,7 @@ class LawyerRegisterForm(forms.ModelForm):
         barcouncil_number = self.cleaned_data.get('barcouncil_number')
 
         # Define a regex pattern for Bar Council Number (Example: UP/1234/2022)
-        pattern = r'^[A-Z]{2}/\d{6}/\d{4}$'
+        pattern = r'^[A-Z]{2}/\d{4}/\d{4}$'
 
         if not re.match(pattern, barcouncil_number):
             raise ValidationError("Invalid Bar Council Number format. Use format: 'XX/1234/2022'.")
@@ -335,7 +334,7 @@ class EditLawyerProfileForm(forms.ModelForm):
     def clean_barcouncil_number(self):
         barcouncil_number = self.cleaned_data.get('barcouncil_number')
         # Define a regex pattern for Bar Council Number (Example: UP/1234/2022)
-        pattern = r'^[A-Z]{2}/\d{6}/\d{4}$'
+        pattern = r'^[A-Z]{2}/\d{4}/\d{4}$'
         if not re.match(pattern, barcouncil_number):
             raise ValidationError("Invalid Bar Council Number format. Use format: 'XX/1234/2022'.")
         return barcouncil_number
@@ -456,3 +455,67 @@ class CourtRegisterForm(forms.ModelForm):
         if confirm_password != password:
             raise ValidationError("Password and confirm password do not match.")
         return confirm_password
+
+class EditCourtProfileForm(forms.ModelForm):
+    COURT_JURISDICTIONS = [
+    ('Federal Jurisdiction', 'Federal Jurisdiction'),
+    ('State Jurisdiction', 'State Jurisdiction'),
+    ('District Jurisdiction', 'District Jurisdiction'),
+    ('Municipal Jurisdiction', 'Municipal Jurisdiction'),
+    ('Criminal Jurisdiction', 'Criminal Jurisdiction'),
+    ('Civil Jurisdiction', 'Civil Jurisdiction'),
+    ('Appellate Jurisdiction', 'Appellate Jurisdiction'),
+    ('Special Jurisdiction', 'Special Jurisdiction'),
+    ('Exclusive Jurisdiction', 'Exclusive Jurisdiction'),
+    ('Concurrent Jurisdiction', 'Concurrent Jurisdiction'),
+]
+    court_jurisdiction = forms.ChoiceField(
+    choices=COURT_JURISDICTIONS, 
+    widget=forms.Select(attrs={'class': 'form-control'})
+)
+
+    COURT_TYPES = [
+    ('Supreme Court', 'Supreme Court'),
+    ('High Court', 'High Court'),
+    ('District Court', 'District Court'),
+    ('Session Court', 'Session Court'),
+    ('Magistrate Court', 'Magistrate Court'),
+    ('Family Court', 'Family Court'),
+    ('Consumer Court', 'Consumer Court'),
+    ('Labor Court', 'Labor Court'),
+    ('Tribunal Court', 'Tribunal Court'),
+    ('Juvenile Court', 'Juvenile Court'),
+    ('Cyber Court', 'Cyber Court'),
+    ('Small Claims Court', 'Small Claims Court'),
+    ('Bankruptcy Court', 'Bankruptcy Court'),
+    ('Environmental Court', 'Environmental Court'),
+]
+
+    court_type = forms.ChoiceField(
+    choices=COURT_TYPES, 
+    widget=forms.Select(attrs={'class': 'form-control'})
+)
+
+    class Meta:
+        model=Register
+        fields=['username','court_jurisdiction','court_type','email','place']
+        widgets={
+            'username':forms.TextInput(attrs={'id':'username','name':'username'}),
+            'court_jurisdiction':forms.TextInput(attrs={'id':'court_jurisdiction','name':'court_jurisdiction'}),
+            'court_type':forms.TextInput(attrs={'id':'court_type','name':'court_type'}),
+            'email':forms.EmailInput(attrs={'id':'email','name':'email'}),
+            'place':forms.TextInput(attrs={'id':'place','name':'place'}),
+        }
+        labels={
+            'username':'Username',
+            'court_jurisdiction':'Court Jurisdiction',
+            'court_type':'Court Type',
+            'email':'E-Mail',
+            'place':'Place',
+        }
+        help_texts={
+            'username':None
+        }
+
+    # Custom Validation for username
+    

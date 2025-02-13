@@ -1,0 +1,32 @@
+{% load static %}
+{% include 'header.html' %}
+<link rel="stylesheet" href="{% static 'css/all_lawyers.css' %}">
+
+<h2>All Lawyers</h2>
+
+<div class="lawyercontainer">
+    {% for lawyer in lawyers %}
+    <div class="lawyer-profile-card">
+        {% if lawyer.image %}
+        <img src="{{ lawyer.image.url }}" alt="Lawyer Profile Picture">
+        {% else %}
+        <img src="{% static 'img/img1.jpeg' %}" alt="Default Profile Picture">
+        {% endif %}
+        
+        <p>{{ lawyer.first_name }}</p>
+        {% if lawyer.specialization %}
+            <p>Specialized in {{ lawyer.specialization }} law</p>
+        {% endif %}
+        <p>Email: {{ lawyer.email }}</p>
+        <p>Phone: {{ lawyer.phone }}</p>
+
+        <a href="#" class="edit-button">View Profile</a>
+    </div>
+    {% empty %}
+    <p>No lawyers found.</p>
+    {% endfor %}
+</div>
+
+<a href="{% url 'lawyer_profileview' %}" class="back-button">Back</a>
+
+{% include 'footer1.html' %}

@@ -1,0 +1,97 @@
+/* Center the heading */
+h2 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-top: 20px;
+    font-family: 'Georgia', serif;
+}
+
+.lawyercontainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 5px; /* Minimal gap between cards */
+    justify-items: center; /* Centers individual cards */
+    align-items: start; /* Ensures they start from the top */
+    padding: 5px; /* Reduce padding */
+    width: 100%;
+    max-width: 1100px; /* Prevents excessive spacing */
+    margin: 0 auto; /* Centers the container */
+}
+
+.lawyer-profile-card {
+    width: 100%; /* Ensures responsiveness */
+    max-width: 320px; /* Adjust width slightly */
+    padding: 8px; /* Reduce padding */
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Lighter shadow */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0; /* Remove unnecessary spacing */
+}
+
+/* Hover effect */
+.lawyer-profile-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Lawyer profile image */
+.lawyer-profile-card img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #fe5d37;
+}
+
+/* Lawyer details */
+.lawyer-profile-card p {
+    color: brown;
+    font-size: 14px;
+    margin: 5px 0;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+/* View Profile button */
+.edit-button {
+    display: inline-block;
+    padding: 8px 15px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: white;
+    background-color: #fe5d37;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.edit-button:hover {
+    background-color: #d94a2f;
+}
+
+/* Back button styling */
+.back-button {
+    display: block;
+    width: 150px;
+    margin: 20px auto;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    background-color: #333;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.back-button:hover {
+    background-color: #555;
+}
+
+.wrapper{
+    background-image: url("../img/mg2.jpg");
+}

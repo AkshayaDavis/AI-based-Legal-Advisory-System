@@ -7,7 +7,7 @@
         }
 
         form {
-            background-color: #1e1e1e; /* Slightly lighter dark background */
+            background-color: #0a0a0a; /* Slightly lighter dark background */
             border-radius: 10px;
             width: 150%;
             max-width: 600px; /* Smaller form width */
@@ -23,7 +23,7 @@
             width: 100%;
             padding: 10px; /* Reduced padding */
             background-color: #f4c542; /* Gold button */
-            color: #1c1c1c; /* Dark text for contrast */
+            color: #080808; /* Dark text for contrast */
             font-weight: bold;
             font-size: 0.9rem; /* Smaller font size */
             border: none;
