@@ -1,14 +1,23 @@
-
+/* Base Body Styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
-    display: center;
+    background-color: #f9f9f9; /* Fallback if no background image */
+}
+
+/* Wrapper for the Background Image & Centering */
+.wrapper {
+    min-height: 100vh;
+    background-image: url("../img/image1.jpeg.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
+
+/* Profile Card */
 .profile-card {
     background: #f8f8f5;
     box-shadow: 0 4px 6px rgba(8, 8, 8, 0.1);
@@ -16,34 +25,43 @@ body {
     width: 650px;
     padding: 20px;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    
+    /* Centered by the .wrapper flex layout, so no margin needed */
 }
+
+/* Profile Image */
 .profile-card img {
     width: 90px;
     height: 100px;
     border-radius: 70%;
     margin-bottom: 20px;
     border: 3px solid #0a0a0a;
+    object-fit: cover; /* Ensures the image fits nicely */
 }
+
+/* Heading */
 .profile-card h2 {
     margin: 10px 0;
     font-size: 24px;
     color: #333;
 }
+
+/* Paragraph Text */
 .profile-card p {
     margin: 5px 0;
     color: #555;
 }
+
+/* Additional Info Section */
 .profile-card .info {
     margin-top: 15px;
 }
+
 .profile-card .info div {
     margin: 5px 0;
     color: #666;
 }
+
+/* Edit Button */
 .edit-button {
     display: inline-block;
     margin-top: 15px;
@@ -55,10 +73,9 @@ body {
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease;
+    cursor: pointer;
 }
+
 .edit-button:hover {
     background-color: #070808;
-}
-.wrapper{
-    background-image: url("../img/image1.jpeg.jpg");
 }

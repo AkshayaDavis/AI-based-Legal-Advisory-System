@@ -1,0 +1,80 @@
+/* Container */
+.bookings-container {
+    width: 100%;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Table Layout */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #050505;
+    color: white;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Common Button Styles */
+.btn {
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #fff;
+    margin: 5px;
+    display: inline-block;
+    transition: background 0.3s ease;
+}
+
+/* Approve Button */
+.approve-btn {
+    background-color: #0c7023; /* Green */
+}
+.approve-btn:hover {
+    background-color: #218838;
+}
+
+/* Reject Button */
+.reject-btn {
+    background-color: #dc3545; /* Red */
+}
+.reject-btn:hover {
+    background-color: #c82333;
+}
+
+/* Message Button */
+.message-btn {
+    background-color: #00254d; /* Blue */
+}
+.message-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Delete Button */
+.delete-btn {
+    background-color: #ee0000; /* Orange */
+}
+.delete-btn:hover {
+    background-color: #e68900;
+}
+
+/* Badge for Booking Status */
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #6c757d; /* Default Gray */
+}

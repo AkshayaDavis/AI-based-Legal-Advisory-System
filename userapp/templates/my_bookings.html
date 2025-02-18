@@ -1,0 +1,54 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/my_bookings.css' %}">
+
+<div class="bookings-container">
+    <h2>My Bookings</h2>
+
+    {% if bookings %}
+    <table>
+        <thead>
+            <tr>
+                <th>Lawyer</th>
+                <th>Specialization</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.lawyer.first_name }}</td>
+                <td>{{ booking.lawyer.specialization }}</td>
+                <td>
+                    {% if booking.status == "Approved" %}
+                        <span class="badge" style="background: green;">Approved</span>
+                    {% elif booking.status == "Rejected" %}
+                        <span class="badge" style="background: red;">Rejected</span>
+                    {% else %}
+                        <!-- If not Approved or Rejected, treat as Pending -->
+                        <span class="badge" style="background: orange;">Pending</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if booking.status == "Approved" %}
+                        <a href="{% url 'chat' booking.lawyer.id %}" class="btn message-btn">Message Lawyer</a>
+                    {% elif booking.status == "Rejected" %}
+                        <span style="color: red; font-weight: bold;">Your request is rejected</span>
+                    {% else %}
+                        <!-- Optionally show some text or a disabled button -->
+                        <span>Waiting for approval</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+    {% else %}
+        <p class="no-bookings">You have not booked any lawyers yet.</p>
+    {% endif %}
+</div>
+
+{% include 'footer.html' %}

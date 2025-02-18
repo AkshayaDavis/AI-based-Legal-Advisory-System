@@ -39,11 +39,10 @@
             <p>Experience - {{ user.experience }} </p>
         {% endif %}
 
-        {% if user.availability_from %}
-           {% if user.availability_to %} 
-                <p>Available Timings: {{ user.availability_from }} - {{ user.availability_to }}</p>
-            {% endif %}
+        {% if user.consultation_mode %}
+            <p>Consultation Mode - {{ user.consultation_mode }}</p>
         {% endif %}
+
 
         <div class="info">
             

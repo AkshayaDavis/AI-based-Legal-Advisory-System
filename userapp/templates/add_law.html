@@ -1,0 +1,15 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/add_law.css' %}">
+
+<div class="add-law-container">
+    <h2>Add a New Law</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit</button>
+    </form>
+  </div>  
+
+{% include 'footer.html' %}

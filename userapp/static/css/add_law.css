@@ -1,0 +1,74 @@
+/* Container for the Add Law Form */
+.add-law-container {
+    width: 50%;
+    margin: 40px auto;
+    background: #f8f9fa;
+    padding: 20px 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading Style */
+  .add-law-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Form Styles */
+  .add-law-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Paragraphs wrapping the form fields */
+  .add-law-container form p {
+    margin-bottom: 15px;
+  }
+  
+  /* Labels */
+  .add-law-container form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  /* Input Fields */
+  .add-law-container form input[type="text"],
+  .add-law-container form input[type="date"],
+  .add-law-container form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  /* Textarea Specific Style */
+  .add-law-container form textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+  
+  /* Submit Button */
+  .add-law-container form button {
+    width: 150px;
+    padding: 10px;
+    margin: 20px auto 0;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover Effect on Button */
+  .add-law-container form button:hover {
+    background-color: #0056b3;
+  }
+  

@@ -7,7 +7,7 @@
         <tr>
             <th>Sl No</th>
             <th>UserName</th>
-            <th>Qualification</th>
+            <th>Bar Council Number</th>
             <th>E-mail</th>
             <th>Phone NO</th>
             <th>Specialization</th>
@@ -18,11 +18,19 @@
             <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>{{ user.username }}</td>
-                <td>{{ user.qualification }}</td>
+                <td>
+                    <span id="barcouncil_number{{ forloop.counter }}">{{ user.barcouncil_number }}</span>
+                    <i class="fa-regular fa-clipboard copy-icon" onclick="copyToClipboard('barcouncil_number{{ forloop.counter }}')"></i>
+                </td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.phone }}</td>
                 <td>{{ user.specialization }}</td>
+                {% if user.is_approved %}
                 <td><button><div class="delete-btn"><a href="{% url 'delete_user' user.id %}">Delete</a></div></button></td>
+                {% else %}
+                <td><a href="{% url 'approve_lawyer' user.id %}" class="btn approve-btn" >Approve</a>
+                <a href="{% url 'reject_lawyer' user.id %}" class="btn reject-btn">Reject</a></td>
+                {% endif %}
             </tr>
             {% endfor %}
         {% else %}
@@ -31,6 +39,24 @@
             </tr>
         {% endif %}
     </table>
+    <script>
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                // Change clipboard icon color to green
+                const copyIcon = document.querySelector(#${elementId} + .copy-icon);
+                copyIcon.classList.add("copied"); // Apply green color
+
+                // Reset back to default color after 2 seconds
+                setTimeout(() => {
+                    copyIcon.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Failed to copy: ", err);
+            });
+        }
+    </script>
+
 </body>
 </html>
 {% include 'footer.html' %}

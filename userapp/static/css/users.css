@@ -23,7 +23,7 @@ th, td {
 }
 
 th {
-    background-color: #aa9166;
+    background-color: #080808;
     color: #ffffff;
     text-transform: uppercase;
     font-weight: bold;
@@ -39,8 +39,8 @@ tr:hover {
 
 /* Styling for Delete Button */
 .delete-btn {
-    background-color: #f8efef; /* Red color */
-    color: rgb(12, 11, 11);
+    background-color: #0c0c0c; /* Red color */
+    color: rgb(247, 0, 0);
     border: none;
     padding: 8px 12px;
     font-size: 14px;

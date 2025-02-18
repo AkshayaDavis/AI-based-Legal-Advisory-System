@@ -1,0 +1,66 @@
+{% load static %}
+{% include 'header.html' %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawyer Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/profile_lawyer.css' %}">
+</head>
+<body>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>{{ lawyer.first_name }}</h1>
+            <p class="specialization">{{ lawyer.specialization }} Law</p>
+        </div>
+        
+        <div class="profile-content">
+            <div class="profile-image">
+                {% if lawyer.image %}
+                    <img src="{{ lawyer.image.url }}" alt="Lawyer Image">
+                {% else %}
+                    <img src="{% static 'images/default-profile.png' %}" alt="Default Profile">
+                {% endif %}
+            </div>
+
+            <div class="profile-details">
+                {% if lawyer.email %}
+                    <p><strong>Email:</strong> {{ lawyer.email }}</p>
+                {% endif %}
+                {% if lawyer.phone %}
+                    <p><strong>Phone:</strong> {{ lawyer.phone }}</p>
+                {% endif %}
+                {% if lawyer.barcouncil_number %}
+                    <p><strong>Bar Council Number:</strong> {{ lawyer.barcouncil_number }}</p>
+                {% endif %}
+                {% if lawyer.qualification %}
+                    <p><strong>Qualification:</strong> {{ lawyer.qualification }}</p>
+                {% endif %}
+                {% if lawyer.bio %}
+                    <p><strong>Bio:</strong> {{ lawyer.bio }}</p>
+                {% endif %}
+                {% if lawyer.experience %}
+                    <p><strong>Experience:</strong> {{ lawyer.experience }}</p>
+                {% endif %}
+                {% if lawyer.address %}
+                    <p><strong>Address:</strong> {{ lawyer.address }}</p>
+                {% endif %}
+                {% if lawyer.consultation_mode %}
+                    <p><strong>Consultation Mode:</strong> {{ lawyer.consultation_mode }}</p>
+                {% endif %}
+                
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a href="{% url 'all_lawyers'  %}" class="back-btn">Back to List</a>
+            <a href="{% url 'chat' lawyer.id %}" class="message-btn">📩 Message</a>
+            <a href="{% url 'bookings' lawyer.id %}" class="appointment-btn">📅 Book Now</a>
+            
+        </div>
+    </div>
+
+</body>
+
+{% include 'footer1.html' %}

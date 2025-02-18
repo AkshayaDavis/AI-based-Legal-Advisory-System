@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 from django.core.exceptions import ValidationError
 import re
-
+from django.forms import ClearableFileInput
 
 class RegisterForm(forms.ModelForm):
     confirm_password=forms.CharField(
@@ -267,9 +267,16 @@ class EditLawyerProfileForm(forms.ModelForm):
     ('Consumer', 'Consumer Protection Law'),
 ]
     specialization = forms.ChoiceField(choices=SPECIALIZATIONS, widget=forms.Select(attrs={'class': 'form-control'}))
+
+    consultation_mode=[
+        ('Online','Online'),
+        ('In-Person','In-Person'),
+        ('Online & In-Person','Online & In-Person'),
+    ]
+    consultation_mode = forms.ChoiceField(choices=consultation_mode, widget=forms.Select(attrs={'class': 'form-control'}))
     class Meta:
         model=Register
-        fields=['image','first_name','qualification','bio', 'username', 'email', 'address','phone','barcouncil_number','specialization','experience','availability_from','availability_to']
+        fields=['image','first_name','qualification','bio', 'username', 'email', 'address','phone','barcouncil_number','specialization','experience','consultation_mode']
         widgets={
             'image':forms.FileInput(attrs={'id':'image','name':'image'}),
             'first_name':forms.TextInput(attrs={'id':'first_name','name':'first_name'}),
@@ -282,8 +289,7 @@ class EditLawyerProfileForm(forms.ModelForm):
             'barcouncil_number':forms.TextInput(attrs={'id':'barcouncil_number','name':'barcouncil_number'}),
             'specialization':forms.Select(attrs={'id':'specialization','name':'specialization'}),
             'experience':forms.TextInput(attrs={'id':'experience','name':'experience'}),
-            'availability_from':forms.TextInput(attrs={'id':'availability_from','name':'availability_from'}),
-            'availability_to':forms.TextInput(attrs={'id':'availability_to','name':'availability_to'}),
+            'consultation_mode':forms.Select(attrs={'id':'consultation_mode','name':'consultation_mode'}),
         }
         labels={
             'image':'PROFILE PICTURE',
@@ -296,8 +302,7 @@ class EditLawyerProfileForm(forms.ModelForm):
             'barcouncil_number':'Bar Council Number',
             'specialization':'Specialization',
             'experience':'Experience',
-            'availability_from':'Availability From',
-            'availability_to':'Availability To',
+            'consultation_mode':'Consultation Mode',
         }
         help_texts={
             'username':None
@@ -518,4 +523,73 @@ class EditCourtProfileForm(forms.ModelForm):
         }
 
     # Custom Validation for username
-    
+
+ALLOWED_FILE_TYPES = ['pdf', 'png', 'jpg', 'jpeg', 'docx']
+MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
+class BookingsForm(forms.ModelForm):
+    class Meta:
+        model = Bookings
+        fields = ['content']
+        widgets = {
+            'content': forms.FileInput(attrs={'id': 'content', 'name': 'content', 'accept': 'application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document'}),
+        }
+
+        labels = {
+            'content': 'Upload File',
+        }
+        help_texts = {
+            'content': 'Allowed file types: PDF, PNG, JPG, DOCX, etc.',
+        }
+
+    def clean_content(self):
+        file = self.cleaned_data.get('content', False)
+
+        if file:
+            # Check file type
+            ext = file.name.split('.')[-1].lower()
+            if ext not in ALLOWED_FILE_TYPES:
+                raise ValidationError("Unsupported file type. Allowed types: PDF, PNG, JPG, DOCX.")
+            
+            # Check file size
+            if file.size > MAX_FILE_SIZE:
+                raise ValidationError("File size must be less than 5MB.")
+        
+        return file
+
+class ChatForm(forms.ModelForm):
+    class Meta:
+        model = Chat
+        fields = ['message']
+        widgets = {
+            'message': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Type your message here...'}),
+        }
+        labels = {
+            'message': '',
+        }
+        help_texts = {
+            'message': '',
+        }
+
+
+class LawForm(forms.ModelForm):
+    class Meta:
+        model = Law
+        fields = ['name', 'ipc', 'description', 'year_of_act']
+        widgets = {
+            'name': forms.TextInput(attrs={'id': 'name', 'name': 'name'}),
+            'ipc': forms.TextInput(attrs={'id': 'ipc', 'name': 'ipc'}),
+            'description': forms.Textarea(attrs={'id': 'description', 'name': 'description'}),
+            'year_of_act': forms.DateInput(attrs={'id': 'year_of_act', 'name': 'year_of_act', 'type': 'date'}),
+        }
+        labels = {
+            'name': 'Name',
+            'ipc': 'IPC Section',
+            'description': 'Description',
+            'year_of_act': 'Year of Act',
+        }
+        help_texts = {
+            'name': '',
+            'ipc': '',
+            'description': '',
+            'year_of_act': '',
+        }

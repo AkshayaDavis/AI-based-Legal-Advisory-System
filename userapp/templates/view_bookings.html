@@ -1,0 +1,60 @@
+<!-- view_bookings.html -->
+
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/view_bookings.css' %}">
+
+<h2 style="text-align: center; margin-top: 20px;">Bookings</h2>
+
+
+
+<div class="bookings-container">
+    {% if bookings %}
+    <table>
+        <thead>
+            <tr>
+                <th>Client Name</th>
+                <th>Client Email</th>
+                <th>Case abstract</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.user.first_name }}</td>
+                <td>{{ booking.user.email }}</td>
+                <td>
+                    {% if booking.content %}
+                        <a href="{{ booking.content.url }}" target="_blank" download>Download</a>
+                    {% else %}
+                        No file uploaded
+                    {% endif %}
+                </td>
+                
+                <td>{{ booking.status }}</td>
+                <td>
+                    {% if booking.status == "Pending" %}
+                        <a href="{% url 'approve_booking' booking.id %}" class="btn approve-btn">Approve</a>
+                        <a href="{% url 'reject_booking' booking.id %}" class="btn reject-btn">Reject</a>
+
+                    {% elif booking.status == "Approved" %}
+                        <a href="{% url 'chat' booking.user.id %}" class="btn message-btn">Message</a>
+
+                    {% elif booking.status == "Rejected" %}
+                        <a href="{% url 'delete_booking' booking.id %}" class="btn delete-btn">Delete</a>
+
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="text-align: center; margin-top: 20px;">No bookings found.</p>
+    {% endif %}
+</div>
+
+{% include 'footer.html' %}

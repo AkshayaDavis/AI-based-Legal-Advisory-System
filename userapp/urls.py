@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-    path('', views.index),
+    path('', views.index,name="index"),
     path('reg', views.reg),
     path('user_login/', views.user_login,name="user_login"),
     path('home',views.home,name="home"),
@@ -50,5 +50,30 @@ urlpatterns = [
 
     path('all_lawyers',views.all_lawyers,name="all_lawyers"),
 
+    path('profile_lawyer/<int:id>/',views.profile_lawyer,name="profile_lawyer"),
+
+    path('approve_lawyer/<int:id>/',views.approve_lawyer,name="approve_lawyer"),
+
+    path('reject_lawyer/<int:id>/',views.reject_lawyer,name="reject_lawyer"),
+
+    path('bookings/<int:id>/',views.bookings,name="bookings"),
+
+    path('view_bookings',views.view_bookings,name="view_bookings"),
+
+    path('approve_booking/<int:id>/',views.approve_booking,name="approve_booking"),
+
+    path('reject_booking/<int:id>/',views.reject_booking,name="reject_booking"),
+
+    path('delete_booking/<int:id>/',views.delete_booking,name="delete_booking"),
+
+    # path('message_booking/<int:id>/',views.message_booking,name="message_booking"),
+
+    path('my_bookings',views.my_bookings,name="my_bookings"),
+
+    path('chat/<int:id>/',views.chat,name="chat"),
+
+    path('add_law',views.add_law,name="add_law"),
+
+    path('view_laws',views.view_laws,name="view_laws"),
 
 ]

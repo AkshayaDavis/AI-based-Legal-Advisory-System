@@ -1,0 +1,29 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+
+<div class="chat-container">
+    <!-- Back Button -->
+    <a href="javascript:history.back()" class="back-btn">← Back</a>
+
+    <h2>Chat with {{ receiver.first_name }}</h2>
+
+    <div class="chat-box">
+        {% for chat in chats %}
+            <div class="chat-message {% if chat.sender == request.user %}sent{% else %}received{% endif %}">
+                <p>{{ chat.message }}</p>
+                <small>{{ chat.created_at|time:"H:i" }}</small>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Chat Input Box Centered -->
+    <form method="post" class="chat-input">
+        {% csrf_token %}
+        <input type="text" name="{{ form.message.name }}" placeholder="Type your message here..." required>
+        <button type="submit" class="send-btn">Send</button>
+    </form>
+</div>
+
+{% include 'footer.html' %}

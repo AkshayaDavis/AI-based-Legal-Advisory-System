@@ -1,0 +1,36 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/bookings.css' %}">
+
+<div class="form-container">
+    <h2>Book a Lawyer</h2>
+    
+    <!-- Lawyer Info Card -->
+    <div class="lawyer-card">
+        <h3>Lawyer Name</h3>
+        <p>{{ lawyer.first_name }}</p>
+
+        <h3>Specialization</h3>
+        <p>{{ lawyer.specialization }} Law</p>
+        
+        <h3>Lawyer Email</h3>
+        <p>{{ lawyer.email }}</p>
+    </div>
+
+    <!-- Booking Form -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <label for="id_content">Please upload case abstract:</label>
+        
+        <div class="file-upload-wrapper">
+            {{ form.content }}
+        </div>        
+
+        <button type="submit" class="book-now-btn">Book Now</button>
+    </form>
+
+</div>
+
+{% include 'footer.html' %}

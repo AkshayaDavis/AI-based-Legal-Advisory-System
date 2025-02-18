@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: l0;
+    padding: 0;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 100vh; /* Full height */
+    background-color: #f4f4f4;
+}
+
+.profile-container {
+    background: white;
+    width: 60%;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.profile-header h1 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.specialization {
+    color: #666;
+    font-style: italic;
+}
+
+.profile-content {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.profile-image {
+    flex: 1;
+    text-align: center;
+}
+
+.profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+    object-fit: cover;
+}
+
+.profile-details {
+    flex: 2;
+    padding-left: 20px;
+}
+
+.profile-details p {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #555;
+}
+
+.profile-details strong {
+    color: #333;
+}
+
+.buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.buttons a {
+    text-decoration: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 5px;
+    display: inline-block;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+/* Back to List Button */
+.back-btn {
+    background-color: #410202;  /* Blue */
+    color: white;
+}
+
+.back-btn:hover {
+    background-color: #050505; /* Darker Blue */
+}
+
+/* Message Button */
+.message-btn {
+    background-color: #410202; /* Green */
+    color: white;
+}
+
+.message-btn:hover {
+    background-color: #070707; /* Darker Green */
+}
+
+/* Book Now Button */
+.appointment-btn {
+    background-color: #410202;  /* Orange */
+    color: white;
+}
+
+.appointment-btn:hover {
+    background-color: #030303; /* Darker Orange */
+}
+
+.message-btn:hover {
+    background-color: #000000;
+}
+
+.wrapper{
+    background-image: url("../img/mg2.jpg");
+}
+

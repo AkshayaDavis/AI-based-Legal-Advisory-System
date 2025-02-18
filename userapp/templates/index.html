@@ -33,7 +33,7 @@
                     <p>Phone: {{ lawyer.phone }}</p>
 
                     <div class="info"></div>
-                    <a href="{% url 'view_more' id %}" class="edit-button">View Profile</a>
+                    <a href="{% url 'profile_lawyer' lawyer.id %}" class="edit-button">View Profile</a>
                 </div>
                 {% empty %}
                 <p>No lawyers found.</p>
