@@ -473,23 +473,4 @@ def chat(request, id):
     return render(request, 'chat.html', {'chats': chats, 'form': form, 'receiver': receiver})
 
 
-def add_law(request):
-    if request.method == 'POST':
-        form = LawForm(request.POST)
-        if form.is_valid():
-            law = form.save(commit=False)
-            law.court = request.user  # Or assign a specific Register instance as needed
-            law.save()
-            messages.success(request, "Law added successfully", extra_tags="success")
-            return redirect('view_laws')
-        else:
-            messages.error(request, "Invalid form data", extra_tags="error")
-    else:
-        form = LawForm()
-    return render(request, 'add_law.html', {'form': form})
-
-
-def view_laws(request):
-    laws=Law.objects.all()
-    return render(request,'view_laws.html',{'laws':laws})
     

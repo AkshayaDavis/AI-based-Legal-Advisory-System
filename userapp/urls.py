@@ -72,8 +72,6 @@ urlpatterns = [
 
     path('chat/<int:id>/',views.chat,name="chat"),
 
-    path('add_law',views.add_law,name="add_law"),
-
-    path('view_laws',views.view_laws,name="view_laws"),
+    
 
 ]

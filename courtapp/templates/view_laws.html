@@ -13,14 +13,20 @@
             <div class="law-row"><strong>IPC Section:</strong> {{ law.ipc }}</div>
             <div class="law-row"><strong>Description:</strong> {{ law.description }}</div>
             <div class="law-row"><strong>Year of Act:</strong> {{ law.year_of_act|date:"Y" }}</div>
+
+            <!-- Buttons for Edit and Delete -->
+            {% if request.session.ut == 'court' %}
+            <div class="button-container">
+                <a href="{% url 'edit_law' law.id %}" class="edit-btn">Edit</a>
+                <a href="{% url 'delete_law' law.id %}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this law?');">Delete</a>
+            </div>
+            {% endif %}
+            
         </div>
         {% endfor %}
     {% else %}
         <p class="no-laws">No laws found.</p>
     {% endif %}
 </div>
-
-
-
 
 {% include 'footer1.html' %}
