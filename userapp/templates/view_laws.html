@@ -1,0 +1,38 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/view_laws.css' %}">
+
+<div class="laws-list-container">
+    <h2><center>New Laws</center></h2>
+    {% if laws %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Court</th>
+                    <th>Name</th>
+                    <th>IPC</th>
+                    <th>Description</th>
+                    <th>Year of Act</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for law in laws %}
+                <tr>
+                    <td>{{ law.court.username|default:"N/A" }}</td>
+                    <td>{{ law.name }}</td>
+                    <td>{{ law.ipc }}</td>
+                    <td>{{ law.description }}</td>
+                    <td>{{ law.year_of_act|date:"Y" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-laws">No laws found.</p>
+    {% endif %}
+</div>
+
+
+
+{% include 'footer.html' %}

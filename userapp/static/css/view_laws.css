@@ -1,0 +1,105 @@
+/* General Container Styling */
+.laws-container {
+    width: 70%;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.laws-container h2 {
+    text-align: center;
+    color: #222;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 16px;
+}
+
+/* Table Header */
+table thead {
+    background: #004085;
+    color: white;
+    text-transform: uppercase;
+}
+
+table th {
+    padding: 14px;
+    text-align: left;
+    font-weight: 600;
+}
+
+/* Table Rows */
+table tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background 0.3s ease-in-out;
+}
+
+table tbody tr:nth-child(even) {
+    background: #f1f1f1;
+}
+
+/* Hover Effect */
+table tbody tr:hover {
+    background: #e0e8f0;
+}
+
+/* Table Data */
+table td {
+    padding: 12px;
+    color: #333;
+}
+
+/* No Laws Message */
+.no-laws {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+    margin-top: 20px;
+}
+
+/* Responsive Table */
+@media screen and (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead tr {
+        display: none;
+    }
+
+    tbody tr {
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        padding: 10px;
+        background: white;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    tbody td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: capitalize;
+        color: #004085;
+    }
+}
