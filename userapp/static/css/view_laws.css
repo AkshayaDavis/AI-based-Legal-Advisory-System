@@ -1,105 +1,90 @@
-/* General Container Styling */
-.laws-container {
-    width: 70%;
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 25px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+/* General Page Styling */
+body {
+    background-color: #1e1e1e;
+    color: #111010;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* Heading */
-.laws-container h2 {
+/* Laws List Container */
+.laws-list-container {
+    width: 80%;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #2a2a2a;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Heading Styling */
+h2 {
+    font-size: 24px;
     text-align: center;
-    color: #222;
-    font-size: 26px;
     font-weight: bold;
     margin-bottom: 15px;
+    color: #f8f8f8;
     text-transform: uppercase;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 5px;
 }
 
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #f8f9fa;
+/* Law Card */
+.law-card {
+    background: #ffffff;
+    padding: 20px;
+    margin-bottom: 15px;
     border-radius: 8px;
-    overflow: hidden;
-    font-size: 16px;
-}
-
-/* Table Header */
-table thead {
-    background: #004085;
-    color: white;
-    text-transform: uppercase;
-}
-
-table th {
-    padding: 14px;
-    text-align: left;
-    font-weight: 600;
-}
-
-/* Table Rows */
-table tbody tr {
-    border-bottom: 1px solid #ddd;
+    box-shadow: 0px 2px 5px rgba(255, 255, 255, 0.1);
     transition: background 0.3s ease-in-out;
 }
 
-table tbody tr:nth-child(even) {
-    background: #f1f1f1;
-}
-
 /* Hover Effect */
-table tbody tr:hover {
-    background: #e0e8f0;
+.law-card:hover {
+    background: #fffdfd;
 }
 
-/* Table Data */
-table td {
-    padding: 12px;
-    color: #333;
+/* Each Row */
+.law-row {
+    font-size: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid #555;
+    display: center;
+    justify-content: space-between;
+}
+
+.law-row:last-child {
+    border-bottom: none;
+}
+
+/* Field Labels */
+.law-row strong {
+    color: #4a90e2;
+    font-weight: bold;
 }
 
 /* No Laws Message */
 .no-laws {
     text-align: center;
     font-size: 18px;
-    color: #777;
+    color: #aaa;
     margin-top: 20px;
 }
 
-/* Responsive Table */
+/* Responsive Design */
 @media screen and (max-width: 768px) {
-    table, thead, tbody, th, td, tr {
+    .law-card {
+        padding: 15px;
+    }
+
+    .law-row {
+        flex-direction: column;
+        padding: 5px 0;
+    }
+
+    .law-row strong {
         display: block;
-    }
-
-    thead tr {
-        display: none;
-    }
-
-    tbody tr {
-        border: 1px solid #ddd;
-        margin-bottom: 10px;
-        padding: 10px;
-        background: white;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    tbody td {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        font-size: 15px;
-    }
-
-    tbody td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        text-transform: capitalize;
-        color: #004085;
+        margin-bottom: 3px;
     }
 }
