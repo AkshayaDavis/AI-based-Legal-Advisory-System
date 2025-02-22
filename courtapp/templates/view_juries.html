@@ -3,7 +3,7 @@
 
 <link rel="stylesheet" href="{% static 'css/view_juries.css' %}">
 
-{% block content %}
+
 <div class="juries-list-container">
     <h2>Jury List</h2>
 
@@ -13,21 +13,22 @@
             <div class="jury-row"><strong>Name:</strong> {{ jury.name }}</div>
             <div class="jury-row"><strong>Email:</strong> {{ jury.email }}</div>
             <div class="jury-row"><strong>Phone:</strong> {{ jury.phone }}</div>
-            <div class="jury-row"><strong>Specialization:</strong> {{ jury.specialization }}</div>
+            <div class="jury-row"><strong>Specialization:</strong> {{ jury.specialization }} law</div>
 
             <!-- Show Edit & Delete buttons only for Court users -->
-            
+            {% if request.session.ut == 'court' %}
             <div class="button-container">
                 <a href="{% url 'edit_jury' jury.id %}" class="edit-btn">Edit</a>
                 <a href="{% url 'delete_jury' jury.id %}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this jury?');">Delete</a>
             </div>
             
         </div>
+        {% endif %}
         {% endfor %}
     {% else %}
         <p class="no-juries">No juries found.</p>
     {% endif %}
 </div>
-{% endblock %}
+
 
 {% include 'footer1.html' %}
