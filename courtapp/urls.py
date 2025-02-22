@@ -9,4 +9,12 @@ urlpatterns = [
     path('edit_law/<int:id>',views.edit_law,name="edit_law"),
 
     path('delete_law/<int:id>',views.delete_law,name="delete_law"),
+
+    path('add_jury',views.add_jury,name="add_jury"),
+
+    path('view_juries',views.view_juries,name="view_juries"),
+
+    path('edit_jury/<int:id>',views.edit_jury,name="edit_jury"),
+
+    path('delete_jury/<int:id>',views.delete_jury,name="delete_jury"),
 ]

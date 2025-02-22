@@ -11,3 +11,11 @@ class Law(models.Model):
     year_of_act = models.DateField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Jury(models.Model):
+    usertype = models.CharField(max_length=50, default="jury")
+    court = models.ForeignKey(Register, on_delete=models.CASCADE,null=True)
+    name = models.CharField(max_length=50, null=True)
+    email = models.EmailField(max_length=50, null=True)
+    phone = models.CharField(max_length=50, null=True)
+    specialization = models.CharField(max_length=50, null=True)

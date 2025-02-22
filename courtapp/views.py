@@ -54,4 +54,47 @@ def delete_law(request,id):
     law.delete()
     messages.success(request, "Law deleted successfully", extra_tags="success")
     return redirect('view_laws')
-    
+
+
+def add_jury(request):
+    if request.method == 'POST':
+        form = JuryForm(request.POST)
+        if form.is_valid():
+            jury = form.save(commit=False)
+            jury.court = request.user  # Or assign a specific Register instance as needed
+            jury.save()
+            messages.success(request, "Jury added successfully", extra_tags="success")
+            return redirect('view_juries')
+        else:
+            messages.error(request, "Invalid form data", extra_tags="error")
+    else:
+        form = JuryForm()
+    return render(request, 'add_jury.html', {'form': form})
+
+
+
+def view_juries(request):
+    juries=Jury.objects.all()
+    return render(request,'view_juries.html',{'juries':juries})
+
+def edit_jury(request,id):
+    jury = get_object_or_404(Jury, id=id)
+    if request.method == 'POST':
+        form = JuryForm(request.POST, instance=jury)
+        if form.is_valid():
+            jury = form.save(commit=False)
+            jury.court = request.user  # Or assign a specific Register instance as needed
+            jury.save()
+            messages.success(request, "Jury updated successfully", extra_tags="success")
+            return redirect('view_juries')
+        else:
+            messages.error(request, "Invalid form data", extra_tags="error")
+    else:
+        form = JuryForm(instance=jury)
+    return render(request, 'add_jury.html', {'form': form})
+
+def delete_jury(request,id):
+    jury = get_object_or_404(Jury, id=id)
+    jury.delete()
+    messages.success(request, "Jury deleted successfully", extra_tags="success")
+    return redirect('view_juries')

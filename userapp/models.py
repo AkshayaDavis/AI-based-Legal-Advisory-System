@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+
 class Register(AbstractUser):
     usertype = models.CharField(max_length=50, default="admin")
     phone = models.CharField(max_length=15, null=True)  # Changed to CharField

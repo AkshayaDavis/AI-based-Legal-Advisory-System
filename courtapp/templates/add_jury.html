@@ -1,0 +1,49 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/add_jury.css' %}">
+<div class="jury-form-container">
+    <h2>Add Jury</h2>
+    
+    <!-- Display messages -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <form method="POST" class="jury-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name:</label>
+            {{ form.name }}
+            <small class="error">{{ form.name.errors }}</small>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            {{ form.email }}
+            <small class="error">{{ form.email.errors }}</small>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            {{ form.phone }}
+            <small class="error">{{ form.phone.errors }}</small>
+        </div>
+
+        <div class="form-group">
+            <label for="specialization">Specialization:</label>
+            {{ form.specialization }}
+            <small class="error">{{ form.specialization.errors }}</small>
+        </div>
+
+        <button type="submit" class="submit-btn">Add Jury</button>
+    </form>
+</div>
+
+
+
+{% include 'footer1.html' %}
