@@ -1,0 +1,46 @@
+{% load static %}
+{% include 'header.html' %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Court Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile_lawyer.css' %}">
+</head>
+
+<body>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>{{ court.first_name }}</h1>
+            <p class="court-type">{{ court.court_type }}</p>
+        </div>
+
+        <div class="profile-content">
+            <div class="profile-image">
+                {% if court.image %}
+                    <img src="{{ court.image.url }}" alt="Court Image">
+                {% else %}
+                    <img src="{% static 'img/img1.jpeg' %}" alt="Default Court Image">
+                {% endif %}
+            </div>
+
+            <div class="profile-details">
+                {% if court.email %}
+                    <p><strong>Email:</strong> {{ court.email }}</p>
+                {% endif %}
+                {% if court.court_jurisdiction %}
+                    <p><strong>Court Jurisdiction:</strong> {{ court.court_jurisdiction }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a href="{% url 'all_courts' %}" class="back-btn">Back to List</a>
+            <a href="{% url 'add_request_trial' court.id %}" class="request-btn">Request Trial</a>
+        </div>
+    </div>
+
+</body>
+
+{% include 'footer1.html' %}

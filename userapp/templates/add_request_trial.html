@@ -1,0 +1,48 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/request_trial.css' %}">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a Trial</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h2>Request a Trial</h2>
+        <p>Request a trial with <strong>{{ lawyer.name }}</strong></p>
+        
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p class="{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="requested_date">{{ form.requested_date.label }}</label>
+                {{ form.requested_date }}
+            </div>
+
+            <div class="form-group">
+                <label for="content">{{ form.content.label }}</label>
+                {{ form.content }}
+                <small>{{ form.content.help_text }}</small>
+            </div>
+
+            <button type="submit" class="btn">Submit Request</button>
+        </form>
+
+        <a href="/" class="back-link">Back to Home</a>
+    </div>
+</body>
+
+
+
+{% include 'footer.html' %}

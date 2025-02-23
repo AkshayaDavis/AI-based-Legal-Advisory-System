@@ -127,3 +127,10 @@ body {
     background-image: url("../img/mg2.jpg");
 }
 
+.trial-btn {
+    background-color: #fe5d37;
+}
+
+.trial-btn:hover {
+    background-color: #d94a2f;
+}

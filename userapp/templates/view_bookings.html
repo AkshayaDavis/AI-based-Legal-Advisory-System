@@ -42,6 +42,7 @@
 
                     {% elif booking.status == "Approved" %}
                         <a href="{% url 'chat' booking.user.id %}" class="btn message-btn">Message</a>
+                        <a href="{% url 'all_courts' %}" class="btn trial-btn">Request Court</a>
 
                     {% elif booking.status == "Rejected" %}
                         <a href="{% url 'delete_booking' booking.id %}" class="btn delete-btn">Delete</a>

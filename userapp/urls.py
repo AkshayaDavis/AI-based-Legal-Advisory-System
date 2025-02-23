@@ -72,6 +72,18 @@ urlpatterns = [
 
     path('chat/<int:id>/',views.chat,name="chat"),
 
-    
+    path('all_courts',views.all_courts,name="all_courts"),
+
+    path('courts_profileview',views.courts_profileview,name="courts_profileview"),
+
+    path('profile_court/<int:id>/',views.profile_court,name="profile_court"),
+
+    path('add_request_trial/<int:id>/', views.add_request_trial, name="add_request_trial"),
+
+    path('update_request_trial/<int:id>',views.update_request_trial,name="update_request_trial"),
+
+    path('delete_request_trial/<int:id>',views.delete_request_trial,name="delete_request_trial"),
+
+    path('view_request_trial/<int:id>',views.view_request_trial,name="view_request_trial"),
 
 ]

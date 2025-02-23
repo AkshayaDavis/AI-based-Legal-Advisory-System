@@ -98,3 +98,5 @@ def delete_jury(request,id):
     jury.delete()
     messages.success(request, "Jury deleted successfully", extra_tags="success")
     return redirect('view_juries')
+
+

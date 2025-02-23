@@ -472,5 +472,66 @@ def chat(request, id):
 
     return render(request, 'chat.html', {'chats': chats, 'form': form, 'receiver': receiver})
 
+def courts_profileview(request):
+    query = request.GET.get('q', '')  # Get search query
+    courts = Register.objects.filter(usertype="court")  # Get all courts
 
-    
+    if query:
+        # Apply search filters
+        courts = courts.filter(
+            Q(first_name__icontains=query) |
+            Q(username__icontains=query)
+        )
+
+    return render(request, 'courts_profileview.html', {'courts': courts})
+
+def all_courts(request):
+    courts = Register.objects.filter(usertype="court")
+    return render(request, 'all_courts.html', {'courts': courts})
+
+def profile_court(request, id):
+    court = get_object_or_404(Register, id=id, usertype="court")
+    return render(request, 'profile_court.html', {'court': court})
+
+def add_request_trial(request, id):
+    lawyer = get_object_or_404(Register, id=id, usertype="lawyer")
+    if request.method == 'POST':
+        form = RequestTrialForm(request.POST, request.FILES)
+        if form.is_valid():
+            request_trial = form.save(commit=False)
+            request_trial.lawyer = lawyer
+            request_trial.save()
+            messages.success(request, "Request Trial successful", extra_tags="success")
+            return redirect('/')
+        else:
+            messages.error(request, "Request Trial failed", extra_tags="error")
+    else:
+        form = RequestTrialForm()
+    return render(request, 'add_request_trial.html', {'form': form, 'lawyer': lawyer})
+
+
+def update_request_trial(request,id):
+    request_trial = get_object_or_404(Trial, id=id)
+    if request.method == 'POST':
+        form = RequestTrialForm(request.POST, request.FILES, instance=request_trial)
+        if form.is_valid():
+            request_trial = form.save(commit=False)
+            request_trial.court = request.user  # Or assign a specific Register instance as needed
+            request_trial.save()
+            messages.success(request, "Request Trial updated successfully", extra_tags="success")
+            return redirect('view_request_trials')
+        else:
+            messages.error(request, "Invalid form data", extra_tags="error")
+    else:
+        form = RequestTrialForm(instance=request_trial)
+    return render(request, 'add_request_trial.html', {'form': form})
+
+def delete_request_trial(request,id):
+    request_trial = get_object_or_404(RequestTrial, id=id)
+    request_trial.delete()
+    messages.success(request, "Request Trial deleted successfully", extra_tags="success")
+    return redirect('view_request_trials')
+
+def view_request_trial(request,id):
+    request_trial = get_object_or_404(RequestTrial, id=id)
+    return render(request, 'view_request_trial.html', {'request_trial': request_trial})

@@ -43,3 +43,14 @@ class Chat(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class Trial(models.Model):
+    user = models.ForeignKey(Register, on_delete=models.CASCADE,null=True)
+    lawyer = models.ForeignKey(Register, on_delete=models.CASCADE, related_name='lawyer_request',null=True)
+    court = models.ForeignKey(Register, on_delete=models.CASCADE, related_name='court_request',null=True)
+    requested_date = models.DateField(null=True)
+    content = models.FileField(upload_to='uploads/', null=True)
+    note = models.TextField(max_length=1000, null=True)
+    status = models.CharField(max_length=50, default="Pending")
+    is_approved = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

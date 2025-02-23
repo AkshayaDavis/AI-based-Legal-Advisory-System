@@ -393,9 +393,10 @@ class CourtRegisterForm(forms.ModelForm):
         )
     class Meta:
         model=Register
-        fields=['username','court_jurisdiction','court_type','email','place','password']
+        fields=['username','first_name','court_jurisdiction','court_type','email','place','password']
         widgets={
             'username':forms.TextInput(attrs={'id':'username','name':'username'}),
+            'first_name':forms.TextInput(attrs={'id':'first_name','name':'first_name'}),
             'court_jurisdiction':forms.TextInput(attrs={'id':'court_jurisdiction','name':'court_jurisdiction'}),
             'court_type':forms.TextInput(attrs={'id':'court_type','name':'court_type'}),
             'email':forms.EmailInput(attrs={'id':'email','name':'email'}),
@@ -404,6 +405,7 @@ class CourtRegisterForm(forms.ModelForm):
         }
         labels={
             'username':'Username',
+            'first_name':'Name',
             'court_jurisdiction':'Court Jurisdiction',
             'court_type':'Court Type',
             'email':'E-Mail',
@@ -503,9 +505,10 @@ class EditCourtProfileForm(forms.ModelForm):
 
     class Meta:
         model=Register
-        fields=['username','court_jurisdiction','court_type','email','place']
+        fields=['username','first_name','court_jurisdiction','court_type','email','place']
         widgets={
             'username':forms.TextInput(attrs={'id':'username','name':'username'}),
+            'first_name':forms.TextInput(attrs={'id':'first_name','name':'first_name'}),
             'court_jurisdiction':forms.TextInput(attrs={'id':'court_jurisdiction','name':'court_jurisdiction'}),
             'court_type':forms.TextInput(attrs={'id':'court_type','name':'court_type'}),
             'email':forms.EmailInput(attrs={'id':'email','name':'email'}),
@@ -513,6 +516,7 @@ class EditCourtProfileForm(forms.ModelForm):
         }
         labels={
             'username':'Username',
+            'first_name':'Name',
             'court_jurisdiction':'Court Jurisdiction',
             'court_type':'Court Type',
             'email':'E-Mail',
@@ -570,4 +574,81 @@ class ChatForm(forms.ModelForm):
             'message': '',
         }
 
+class RequestTrialForm(forms.ModelForm):
+    class Meta:
+        model = Trial
+        fields = ['content', 'requested_date']
+        widgets = {
+            'content': forms.FileInput(attrs={'id': 'content', 'name': 'content','accept': 'application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document'}),
+            'requested_date': forms.DateInput(attrs={'type': 'date', 'id': 'requested_date', 'name': 'requested_date'}),
+        }
 
+        labels = {
+            'content': 'Upload File',
+            'requested_date': 'Requested Date',
+        }
+        help_texts = {
+            'content': 'Allowed file types: PDF, PNG, JPG, DOCX, etc.',
+
+        }
+
+    def clean_content(self):
+        file = self.cleaned_data.get('content', False)
+
+        if file:
+            # Check file type
+            ext = file.name.split('.')[-1].lower()
+            if ext not in ALLOWED_FILE_TYPES:
+                raise ValidationError("Unsupported file type. Allowed types: PDF, PNG, JPG, DOCX.")
+            
+            # Check file size
+            if file.size > MAX_FILE_SIZE:
+                raise ValidationError("File size must be less than 5MB.")
+        
+        return file
+
+    def clean_requested_date(self):
+        requested_date = self.cleaned_data.get('requested_date')
+        if requested_date < datetime.date.today():
+            raise ValidationError("Requested date must be a future date.")
+        return requested_date
+        
+
+class RequestTrialUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Trial
+        fields = ['content', 'requested_date']
+        widgets = {
+            'content': forms.FileInput(attrs={'id': 'content', 'name': 'content','accept': 'application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document'}),
+            'requested_date': forms.DateInput(attrs={'type': 'date', 'id': 'requested_date', 'name': 'requested_date'}),
+        }
+
+        labels = {
+            'content': 'Upload File',
+            'requested_date': 'Requested Date',
+        }
+        help_texts = {
+            'content': 'Allowed file types: PDF, PNG, JPG, DOCX, etc.',
+
+        }
+
+    def clean_content(self):
+        file = self.cleaned_data.get('content', False)
+
+        if file:
+            # Check file type
+            ext = file.name.split('.')[-1].lower()
+            if ext not in ALLOWED_FILE_TYPES:
+                raise ValidationError("Unsupported file type. Allowed types: PDF, PNG, JPG, DOCX.")
+            
+            # Check file size
+            if file.size > MAX_FILE_SIZE:
+                raise ValidationError("File size must be less than 5MB.")
+        
+        return file
+
+    def clean_requested_date(self):
+        requested_date = self.cleaned_data.get('requested_date')
+        if requested_date < datetime.date.today():
+            raise ValidationError("Requested date must be a future date.")
+        return requested_date

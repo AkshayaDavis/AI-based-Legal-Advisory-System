@@ -1,0 +1,31 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/all_lawyers.css' %}">
+
+<h2 class="center">Choose a Court</h2>
+
+<div class="lawyercontainer">
+    {% for court in courts %}
+    <div class="lawyer-profile-card">
+        
+        {% if court.image %}
+        <img src="{{ court.image.url }}" alt="Court Profile Picture">
+        {% else %}
+        <img src="{% static 'img/img1.jpeg' %}" alt="Default Court Image">
+        {% endif %}
+        
+        <h3>{{ court.first_name }}</h3>
+        <p><strong>Court Type:</strong> {{ court.court_type }}</p>
+
+        <a href="{% url 'profile_court' court.id %}" class="edit-button">View Court</a>
+
+    </div>
+    {% empty %}
+    <p>No courts found.</p>
+    {% endfor %}
+</div>
+
+<a href="{% url 'index' %}" class="back-button">Back</a>
+
+{% include 'footer.html' %}

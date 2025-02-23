@@ -1,0 +1,41 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/lawyers_view.css' %}">
+
+<!-- Search Bar -->
+<form method="GET" action="{% url 'courts_profileview' %}" class="search-form">
+    <div class="search-container">
+        <input type="text" name="q" placeholder="Search for courts..." value="{{ request.GET.q }}" class="search-input">
+        <button type="submit" class="search-button">Search</button>
+    </div>
+</form>
+
+<!-- Courts Display -->
+<div class="lawyercontainer">
+    {% for court in courts|slice:":3" %}  <!-- Show only 3 courts initially -->
+    <div class="lawyer-profile-card">
+        
+        {% if court.image %}
+        <img src="{{ court.image.url }}" alt="Court Profile Picture">
+        {% else %}
+        <img src="{% static 'img/img1.jpeg' %}" alt="Default Court Image">
+        {% endif %}
+        
+        <h3>{{ court.first_name }}</h3>
+        <p><strong>Court Type:</strong> {{ court.court_type }}</p>
+
+
+        <a href="{% url 'profile_court' court.id %}" class="edit-button">View Court</a>
+    </div>
+    {% empty %}
+    <p>No courts found.</p>
+    {% endfor %}
+</div>
+
+<!-- See More Button -->
+<div class="see-more-container">
+    <a href="{% url 'all_courts' %}" class="see-more-button">See More</a>
+</div>
+
+{% include 'footer.html' %}

@@ -77,7 +77,7 @@ class JuryForm(forms.ModelForm):
 
     def clean_name(self):
         name = self.cleaned_data.get('name')
-        if not re.match(r'^[a-zA-Z ]+$', name):
+        if not re.match(r'^[a-zA-Z . ]+$', name):
             raise ValidationError('Name should contain only alphabets')
         return name
 
