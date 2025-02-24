@@ -475,33 +475,35 @@ class EditCourtProfileForm(forms.ModelForm):
     ('Special Jurisdiction', 'Special Jurisdiction'),
     ('Exclusive Jurisdiction', 'Exclusive Jurisdiction'),
     ('Concurrent Jurisdiction', 'Concurrent Jurisdiction'),
-]
+
+    ]
+
+   
     court_jurisdiction = forms.ChoiceField(
     choices=COURT_JURISDICTIONS, 
     widget=forms.Select(attrs={'class': 'form-control'})
 )
 
     COURT_TYPES = [
-    ('Supreme Court', 'Supreme Court'),
-    ('High Court', 'High Court'),
-    ('District Court', 'District Court'),
-    ('Session Court', 'Session Court'),
-    ('Magistrate Court', 'Magistrate Court'),
-    ('Family Court', 'Family Court'),
-    ('Consumer Court', 'Consumer Court'),
-    ('Labor Court', 'Labor Court'),
-    ('Tribunal Court', 'Tribunal Court'),
-    ('Juvenile Court', 'Juvenile Court'),
-    ('Cyber Court', 'Cyber Court'),
-    ('Small Claims Court', 'Small Claims Court'),
-    ('Bankruptcy Court', 'Bankruptcy Court'),
-    ('Environmental Court', 'Environmental Court'),
-]
+        ('Supreme Court', 'Supreme Court'),
+        ('High Court', 'High Court'),
+        ('District Court', 'District Court'),
+        ('Session Court', 'Session Court'),
+        ('Magistrate Court', 'Magistrate Court'),
+        ('Family Court', 'Family Court'),
+        ('Consumer Court', 'Consumer Court'),
+        ('Labor Court', 'Labor Court'),
+        ('Tribunal Court', 'Tribunal Court'),
+        ('Juvenile Court', 'Juvenile Court'),
+        ('Cyber Court', 'Cyber Court'),
+        ('Small Claims Court', 'Small Claims Court'),
+        ('Bankruptcy Court', 'Bankruptcy Court'),
+        ('Environmental Court', 'Environmental Court'),
+    ]
 
     court_type = forms.ChoiceField(
-    choices=COURT_TYPES, 
-    widget=forms.Select(attrs={'class': 'form-control'})
-)
+        choices=COURT_TYPES, 
+        widget=forms.Select(attrs={'class': 'form-control'}))
 
     class Meta:
         model=Register
@@ -530,6 +532,8 @@ class EditCourtProfileForm(forms.ModelForm):
 
 ALLOWED_FILE_TYPES = ['pdf', 'png', 'jpg', 'jpeg', 'docx']
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
+
+
 class BookingsForm(forms.ModelForm):
     class Meta:
         model = Bookings
@@ -575,21 +579,31 @@ class ChatForm(forms.ModelForm):
         }
 
 class RequestTrialForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(RequestTrialForm, self).__init__(*args, **kwargs)
+        
+        # Fetch court names from the Register model (assuming courts are stored with usertype='court')
+        court_choices = Register.objects.filter(usertype="court").values_list('id', 'court_type')
+        
+        # Set choices dynamically
+        self.fields['court_type'] = forms.ChoiceField(
+            choices=court_choices,
+            widget=forms.Select(attrs={'class': 'form-control'})
+        )
+
     class Meta:
         model = Trial
-        fields = ['content', 'requested_date']
+        fields = ['content', 'court_type']
         widgets = {
-            'content': forms.FileInput(attrs={'id': 'content', 'name': 'content','accept': 'application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document'}),
-            'requested_date': forms.DateInput(attrs={'type': 'date', 'id': 'requested_date', 'name': 'requested_date'}),
+            'content': forms.FileInput(attrs={'id': 'content', 'name': 'content', 'accept': 'application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document'})
         }
-
         labels = {
             'content': 'Upload File',
-            'requested_date': 'Requested Date',
+            'court_type': 'Court Type'
         }
         help_texts = {
             'content': 'Allowed file types: PDF, PNG, JPG, DOCX, etc.',
-
+            'court_type': 'Select a court from the list.',
         }
 
     def clean_content(self):
@@ -607,25 +621,36 @@ class RequestTrialForm(forms.ModelForm):
         
         return file
 
-    def clean_requested_date(self):
-        requested_date = self.cleaned_data.get('requested_date')
-        if requested_date < datetime.date.today():
-            raise ValidationError("Requested date must be a future date.")
-        return requested_date
-        
 
 class RequestTrialUpdateForm(forms.ModelForm):
+    COURT_TYPES = [
+        ('Supreme Court', 'Supreme Court'),
+        ('High Court', 'High Court'),
+        ('District Court', 'District Court'),
+        ('Session Court', 'Session Court'),
+        ('Magistrate Court', 'Magistrate Court'),
+        ('Family Court', 'Family Court'),
+        ('Consumer Court', 'Consumer Court'),
+        ('Labor Court', 'Labor Court'),
+        ('Tribunal Court', 'Tribunal Court'),
+        ('Juvenile Court', 'Juvenile Court'),
+        ('Cyber Court', 'Cyber Court'),
+        ('Small Claims Court', 'Small Claims Court'),
+        ('Bankruptcy Court', 'Bankruptcy Court'),
+        ('Environmental Court', 'Environmental Court'),
+    ]
+
+    court_type = forms.ChoiceField(
+    choices=COURT_TYPES, 
+    widget=forms.Select(attrs={'class': 'form-control'}))
     class Meta:
         model = Trial
-        fields = ['content', 'requested_date']
+        fields = ['content','court_type']
         widgets = {
-            'content': forms.FileInput(attrs={'id': 'content', 'name': 'content','accept': 'application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document'}),
-            'requested_date': forms.DateInput(attrs={'type': 'date', 'id': 'requested_date', 'name': 'requested_date'}),
-        }
-
+            'content': forms.FileInput(attrs={'id': 'content', 'name': 'content','accept': 'application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document'}),        }
         labels = {
             'content': 'Upload File',
-            'requested_date': 'Requested Date',
+            'court_type':'Court Type'
         }
         help_texts = {
             'content': 'Allowed file types: PDF, PNG, JPG, DOCX, etc.',
@@ -646,9 +671,3 @@ class RequestTrialUpdateForm(forms.ModelForm):
                 raise ValidationError("File size must be less than 5MB.")
         
         return file
-
-    def clean_requested_date(self):
-        requested_date = self.cleaned_data.get('requested_date')
-        if requested_date < datetime.date.today():
-            raise ValidationError("Requested date must be a future date.")
-        return requested_date

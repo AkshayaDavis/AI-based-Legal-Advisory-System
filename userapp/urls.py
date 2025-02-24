@@ -86,4 +86,6 @@ urlpatterns = [
 
     path('view_request_trial/<int:id>',views.view_request_trial,name="view_request_trial"),
 
+    path('trial',views.trial,name="trial"),
+
 ]

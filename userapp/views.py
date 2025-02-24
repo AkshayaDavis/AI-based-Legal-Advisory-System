@@ -493,13 +493,17 @@ def profile_court(request, id):
     court = get_object_or_404(Register, id=id, usertype="court")
     return render(request, 'profile_court.html', {'court': court})
 
-def add_request_trial(request, id):
-    lawyer = get_object_or_404(Register, id=id, usertype="lawyer")
+def add_request_trial(request,id):
+    booking = Bookings.objects.get(id=id)
+    lawyer=request.user
     if request.method == 'POST':
         form = RequestTrialForm(request.POST, request.FILES)
         if form.is_valid():
+            court = form.cleaned_data['court']
             request_trial = form.save(commit=False)
-            request_trial.lawyer = lawyer
+            request_trial.lawyer = request.user
+            request_trial.booking = booking
+            request_trial.court = court
             request_trial.save()
             messages.success(request, "Request Trial successful", extra_tags="success")
             return redirect('/')
@@ -535,3 +539,9 @@ def delete_request_trial(request,id):
 def view_request_trial(request,id):
     request_trial = get_object_or_404(RequestTrial, id=id)
     return render(request, 'view_request_trial.html', {'request_trial': request_trial})
+
+def trial(request):
+    user = request.user
+    bookings = Bookings.objects.filter(lawyer=user,is_approved=True)
+    print(bookings)
+    return render(request, 'trial.html', {'bookings': bookings})
