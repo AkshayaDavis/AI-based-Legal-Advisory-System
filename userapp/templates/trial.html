@@ -29,7 +29,20 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{% url 'add_request_trial' booking.id %}" class="btn trial-btn">⚖ Request for Trial</a>
+                    {% for trial in trials %}
+                        {% if trial.booking.id == booking.id %}
+                            {% if trial.status == 'Requested' %}
+                            <p>Requested</p>
+                            {% elif trial.status == 'Approved' %}
+                            <p>Approved</p>
+                            <a href="" class="btn trial-btn">View Trial Schedule</a>
+                            {% else %}
+                            {{ trial.status }}
+                            <a href="{% url 'add_request_trial' booking.id %}" class="btn trial-btn">⚖ Request for Trial</a>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    
                 </td>
             </tr>
         {% endfor %}

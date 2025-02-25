@@ -17,4 +17,6 @@ urlpatterns = [
     path('edit_jury/<int:id>',views.edit_jury,name="edit_jury"),
 
     path('delete_jury/<int:id>',views.delete_jury,name="delete_jury"),
+
+    path('schedule_trial',views.schedule_trial,name="schedule_trial"),
 ]

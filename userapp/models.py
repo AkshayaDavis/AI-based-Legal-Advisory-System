@@ -15,7 +15,7 @@ class Register(AbstractUser):
     court_jurisdiction = models.CharField(max_length=50, null=True)
     court_type = models.CharField(max_length=50, null=True)
     place = models.CharField(max_length=50, null=True)
-    is_approved = models.BooleanField(default=False)
+    is_approved = models.BooleanField(default=True)
 
 class Reset(models.Model):
     otp = models.CharField(max_length=6, null=True)
@@ -49,8 +49,8 @@ class Trial(models.Model):
     booking = models.ForeignKey(Bookings, on_delete=models.CASCADE,null=True)
     content = models.FileField(upload_to='uploads/', null=True)
     court_type = models.CharField(max_length=50, null=True)
-    note = models.TextField(max_length=1000, null=True)
     status = models.CharField(max_length=50, default="Pending")
+    response = models.TextField(max_length=1000, null=True)
     is_approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -134,3 +134,34 @@ class JuryUpdateForm(forms.ModelForm):
             'specialization': '',
         }
         
+
+class ScheduleTrial(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ScheduleTrial, self).__init__(*args, **kwargs)
+        
+        # Fetch court names from the Register model (assuming courts are stored with usertype='court')
+        jury_choices = Jury.objects.filter(usertype="jury").values_list('id', 'name')
+        
+        # Set choices dynamically
+        self.fields['name'] = forms.ChoiceField(
+            choices=jury_choices,
+            widget=forms.Select(attrs={'class': 'form-control'})
+        )
+    class Meta:
+        model = Schedule
+        fields = [ 'jury', 'scheduled_date', 'scheduled_time']
+        widgets = {
+            'jury': forms.Select(attrs={'id': 'jury', 'name': 'jury'}),
+            'scheduled_date': forms.DateInput(attrs={'id': 'scheduled_date', 'name': 'scheduled_date', 'type': 'date'}),
+            'scheduled_time': forms.TimeInput(attrs={'id': 'scheduled_time', 'name': 'scheduled_time', 'type': 'time'}),
+        }
+        labels = {
+            'jury': 'Jury',
+            'scheduled_date': 'Scheduled Date',
+            'scheduled_time': 'Scheduled Time',
+        }
+        help_texts = {
+            'jury': '',
+            'scheduled_date': '',
+            'scheduled_time': '',
+        }

@@ -80,12 +80,14 @@ urlpatterns = [
 
     path('add_request_trial/<int:id>/', views.add_request_trial, name="add_request_trial"),
 
-    path('update_request_trial/<int:id>',views.update_request_trial,name="update_request_trial"),
-
-    path('delete_request_trial/<int:id>',views.delete_request_trial,name="delete_request_trial"),
-
-    path('view_request_trial/<int:id>',views.view_request_trial,name="view_request_trial"),
-
     path('trial',views.trial,name="trial"),
+
+    path('view_trial',views.view_trial,name="view_trial"),
+
+    path('approve_trial/<int:id>/',views.approve_trial,name="approve_trial"),
+
+    path('reject_trial/<int:id>/',views.reject_trial,name="reject_trial"),
+
+    path('delete_trial/<int:id>/',views.delete_trial,name="delete_trial"),
 
 ]

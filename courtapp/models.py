@@ -19,3 +19,11 @@ class Jury(models.Model):
     email = models.EmailField(max_length=50, null=True)
     phone = models.CharField(max_length=50, null=True)
     specialization = models.CharField(max_length=50, null=True)
+
+class Schedule(models.Model):
+    jury = models.ForeignKey(Jury, on_delete=models.CASCADE,null=True, related_name='jury_schedule')
+    scheduled_date = models.DateField(null=True)
+    scheduled_time = models.TimeField(null=True)
+    status = models.CharField(max_length=50, default="Pending")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

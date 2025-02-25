@@ -1,0 +1,28 @@
+/* Container for Rejection Reason */
+.reason-container {
+    width: 50%;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Reason Text */
+.reason-container p {
+    font-size: 18px;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Highlighted Text */
+.reason-container strong {
+    color: #000;
+}

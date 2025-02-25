@@ -621,53 +621,16 @@ class RequestTrialForm(forms.ModelForm):
         
         return file
 
-
-class RequestTrialUpdateForm(forms.ModelForm):
-    COURT_TYPES = [
-        ('Supreme Court', 'Supreme Court'),
-        ('High Court', 'High Court'),
-        ('District Court', 'District Court'),
-        ('Session Court', 'Session Court'),
-        ('Magistrate Court', 'Magistrate Court'),
-        ('Family Court', 'Family Court'),
-        ('Consumer Court', 'Consumer Court'),
-        ('Labor Court', 'Labor Court'),
-        ('Tribunal Court', 'Tribunal Court'),
-        ('Juvenile Court', 'Juvenile Court'),
-        ('Cyber Court', 'Cyber Court'),
-        ('Small Claims Court', 'Small Claims Court'),
-        ('Bankruptcy Court', 'Bankruptcy Court'),
-        ('Environmental Court', 'Environmental Court'),
-    ]
-
-    court_type = forms.ChoiceField(
-    choices=COURT_TYPES, 
-    widget=forms.Select(attrs={'class': 'form-control'}))
+class RejectTrialForm(forms.ModelForm):
     class Meta:
         model = Trial
-        fields = ['content','court_type']
+        fields = ['response']
         widgets = {
-            'content': forms.FileInput(attrs={'id': 'content', 'name': 'content','accept': 'application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document'}),        }
+            'response': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Enter reason for rejection...'}),
+        }
         labels = {
-            'content': 'Upload File',
-            'court_type':'Court Type'
+            'response': '',
         }
         help_texts = {
-            'content': 'Allowed file types: PDF, PNG, JPG, DOCX, etc.',
-
+            'response': '',
         }
-
-    def clean_content(self):
-        file = self.cleaned_data.get('content', False)
-
-        if file:
-            # Check file type
-            ext = file.name.split('.')[-1].lower()
-            if ext not in ALLOWED_FILE_TYPES:
-                raise ValidationError("Unsupported file type. Allowed types: PDF, PNG, JPG, DOCX.")
-            
-            # Check file size
-            if file.size > MAX_FILE_SIZE:
-                raise ValidationError("File size must be less than 5MB.")
-        
-        return file

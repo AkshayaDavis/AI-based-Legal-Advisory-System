@@ -99,4 +99,18 @@ def delete_jury(request,id):
     messages.success(request, "Jury deleted successfully", extra_tags="success")
     return redirect('view_juries')
 
+def schedule_trial(request):
+    if request.method == "POST":
+        form = ScheduleTrial(request.POST)
+        if form.is_valid():
+            schedule = form.save(commit=False)
+            schedule.status = "Scheduled"  # Set status
+            schedule.save()
+            messages.success(request, "Trial scheduled successfully!")
+            return redirect('view_trial')  # Redirect to trial list page
+        else:
+            messages.error(request, "Error scheduling trial. Please check your inputs.")
+    else:
+        form = ScheduleTrial()
 
+    return render(request, 'schedule_trial.html', {'form': form})

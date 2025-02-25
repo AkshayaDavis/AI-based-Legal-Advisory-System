@@ -1,0 +1,30 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/schedule.css' %}">
+
+<div class="container">
+    <h2 class="heading">Schedule Trial</h2>
+    <form method="post" class="schedule-form">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="jury">Jury</label>
+            {{ form.name }}
+        </div>
+
+        <div class="form-group">
+            <label for="scheduled_date">Scheduled Date</label>
+            {{ form.scheduled_date }}
+        </div>
+
+        <div class="form-group">
+            <label for="scheduled_time">Scheduled Time</label>
+            {{ form.scheduled_time }}
+        </div>
+
+        <button type="submit" class="btn submit-btn">Schedule</button>
+    </form>
+</div>
+
+{% include 'footer1.html' %}

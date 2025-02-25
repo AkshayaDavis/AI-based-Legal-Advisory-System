@@ -499,10 +499,14 @@ def add_request_trial(request,id):
     if request.method == 'POST':
         form = RequestTrialForm(request.POST, request.FILES)
         if form.is_valid():
-            court = form.cleaned_data['court']
+            court_type = form.cleaned_data['court_type']
+            print(court_type)
+            court = Register.objects.get(id=court_type)
             request_trial = form.save(commit=False)
             request_trial.lawyer = request.user
             request_trial.booking = booking
+            request_trial.court_type = court.court_type
+            request_trial.status = "Requested"
             request_trial.court = court
             request_trial.save()
             messages.success(request, "Request Trial successful", extra_tags="success")
@@ -514,34 +518,46 @@ def add_request_trial(request,id):
     return render(request, 'add_request_trial.html', {'form': form, 'lawyer': lawyer})
 
 
-def update_request_trial(request,id):
-    request_trial = get_object_or_404(Trial, id=id)
-    if request.method == 'POST':
-        form = RequestTrialForm(request.POST, request.FILES, instance=request_trial)
-        if form.is_valid():
-            request_trial = form.save(commit=False)
-            request_trial.court = request.user  # Or assign a specific Register instance as needed
-            request_trial.save()
-            messages.success(request, "Request Trial updated successfully", extra_tags="success")
-            return redirect('view_request_trials')
-        else:
-            messages.error(request, "Invalid form data", extra_tags="error")
-    else:
-        form = RequestTrialForm(instance=request_trial)
-    return render(request, 'add_request_trial.html', {'form': form})
-
-def delete_request_trial(request,id):
-    request_trial = get_object_or_404(RequestTrial, id=id)
-    request_trial.delete()
-    messages.success(request, "Request Trial deleted successfully", extra_tags="success")
-    return redirect('view_request_trials')
-
-def view_request_trial(request,id):
-    request_trial = get_object_or_404(RequestTrial, id=id)
-    return render(request, 'view_request_trial.html', {'request_trial': request_trial})
-
 def trial(request):
     user = request.user
     bookings = Bookings.objects.filter(lawyer=user,is_approved=True)
+    trials = Trial.objects.filter(lawyer=user,booking__in=bookings)
     print(bookings)
-    return render(request, 'trial.html', {'bookings': bookings})
+    print(trials)
+    return render(request, 'trial.html', {'bookings': bookings,'trials':trials})
+
+def view_trial(request):
+    user = request.user
+    trials = Trial.objects.filter(court=user)
+    return render(request, 'view_trial.html', {'trials': trials})
+
+def approve_trial(request, id):
+    trial = Trial.objects.get(id=id)
+    trial.is_approved = True
+    trial.status = "Approved"
+    trial.save()
+    messages.success(request, "Trial approved successfully", extra_tags="success")
+    return redirect('trial')
+
+
+def delete_trial(request, id):
+    trial = Trial.objects.get(id=id)
+    trial.delete()
+    messages.success(request, "Trial deleted successfully", extra_tags="success")
+    return redirect('trial')
+
+
+
+def reject_trial(request, id):
+    trial = get_object_or_404(Trial, id=id)
+    if request.method == "POST":
+        form = RejectTrialForm(request.POST)
+        if not form.is_valid():
+            trial.status = "Rejected"
+            trial.save()
+            message=f"Dear {lawyer.username}, Sorry to say that your trial request is rejected."
+            email_from=settings.EMAIL_HOST_USER
+            email_to=[user.email]
+            send_mail(subject, message, email_from, email_to)
+            return redirect('view_trial')
+    return render(request, 'reject_trial.html', {'trial': trial})

@@ -1771,3 +1771,17 @@ a:focus {
         text-align: center;
     }
 }
+
+.navbar-nav .dropdown-menu {
+    background-color: #000; /* Black background */
+    border: none;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item {
+    color: white;
+    padding: 10px;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #444;
+}

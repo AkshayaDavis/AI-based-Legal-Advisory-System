@@ -1,0 +1,53 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/view_trial.css' %}">
+
+<h2 style="text-align: center; margin-top: 20px;">Trial Requests</h2>
+
+<div class="bookings-container">
+    {% if trials %}
+    <table>
+        <thead>
+            <tr>
+                <th>Lawyer Name</th>
+                <th>Lawyer Email</th>
+                <th>Case Document</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for trial in trials %}
+            <tr>
+                <td>{{ trial.lawyer.first_name }}</td>
+                <td>{{ trial.lawyer.email }}</td>
+                <td>
+                    {% if trial.content %}
+                        <a href="{{ trial.content.url }}" target="_blank" download>Download</a>
+                    {% else %}
+                        No file uploaded
+                    {% endif %}
+                </td>
+                <td>
+                    {% if trial.status == "Requested" %}
+                        <a href="{% url 'approve_trial' trial.id %}" class="btn approve-btn">Approve</a>
+                        <a href="{% url 'reject_trial' trial.id %}" class="btn reject-btn">Reject</a>
+
+                    {% elif trial.status == "Approved" %}
+                        <a href="{% url 'schedule_trial' %}" class="btn schedule-btn">Schedule Trial</a>
+
+                    {% elif trial.status == "Rejected" %}
+                    <span style="color: red; font-weight: bold;">Trial rejected</span>
+
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="text-align: center; margin-top: 20px;">No trial requests found.</p>
+    {% endif %}
+</div>
+
+{% include 'footer.html' %}

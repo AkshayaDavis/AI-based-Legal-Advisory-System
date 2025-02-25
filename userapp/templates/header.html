@@ -121,20 +121,36 @@
 
                             {% elif request.session.ut == 'court' %}
                             <div class="navbar-nav mr-auto">
-                                <a href="/" class="nav-item nav-link ">Home</a>
+                                <a href="/" class="nav-item nav-link">Home</a>
                                 <a href="/about" class="nav-item nav-link">About</a>
-                                <a href="/add_jury" class="nav-item nav-link">Add Jury</a>
-                                <a href="/view_juries" class="nav-item nav-link">View Jury</a>
-                                <a href="/add_law" class="nav-item nav-link">Add Law</a>
-                                <a href="/view_laws" class="nav-item nav-link">New Laws</a>
+                                <a href="/view_trial" class="nav-item nav-link">Trial Requests</a>
+                            
+                                <!-- Jury Dropdown -->
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" id="juryDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Jury
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="juryDropdown">
+                                        <a href="/add_jury" class="dropdown-item">Add Jury</a>
+                                        <a href="/view_juries" class="dropdown-item">View Jury</a>
+                                    </div>
+                                </div>
+                            
+                                <!-- Laws Dropdown -->
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" id="lawDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Laws
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="lawDropdown">
+                                        <a href="/add_law" class="dropdown-item">Add Law</a>
+                                        <a href="/view_laws" class="dropdown-item">New Laws</a>
+                                    </div>
+                                </div>
+                            
                                 <a href="/court_profile" class="nav-item nav-link">My Profile</a>
-                                <!-- <a href="/view_user" class="nav-item nav-link">View Users</a> -->
                                 <a href="/user_logout" class="nav-item nav-link">Logout</a>
-                                
-                                <!-- <a href="/service" class="nav-item nav-link">Practice</a>
-                                <a href="/team" class="nav-item nav-link">Attorneys</a>
-                                <a href="/contact" class="nav-item nav-link">Contact</a> -->
                             </div>
+                            
 
                             {% else %}
                             <div class="navbar-nav mr-auto">
