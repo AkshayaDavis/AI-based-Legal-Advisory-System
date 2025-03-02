@@ -18,5 +18,9 @@ urlpatterns = [
 
     path('delete_jury/<int:id>',views.delete_jury,name="delete_jury"),
 
-    path('schedule_trial',views.schedule_trial,name="schedule_trial"),
+    path('schedule_trial/<int:id>/',views.schedule_trial,name="schedule_trial"),
+
+    path('reject_schedule/<int:id>/',views.reject_schedule,name="reject_schedule"),
+
+    path('view_trial_schedule/<int:id>/',views.view_trial_schedule,name="view_trial_schedule"),
 ]

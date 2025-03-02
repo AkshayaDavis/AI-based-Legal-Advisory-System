@@ -99,18 +99,41 @@ def delete_jury(request,id):
     messages.success(request, "Jury deleted successfully", extra_tags="success")
     return redirect('view_juries')
 
-def schedule_trial(request):
-    if request.method == "POST":
+
+def schedule_trial(request, id):
+    trial = get_object_or_404(Trial, id=id)  # Fetch Trial, not Schedule
+
+    if request.method == 'POST':
         form = ScheduleTrial(request.POST)
         if form.is_valid():
             schedule = form.save(commit=False)
-            schedule.status = "Scheduled"  # Set status
+            schedule.status = "Scheduled"
             schedule.save()
-            messages.success(request, "Trial scheduled successfully!")
-            return redirect('view_trial')  # Redirect to trial list page
+            messages.success(request, "Trial scheduled successfully")
+            return redirect('view_trial')  # Redirect to trial listing page
         else:
-            messages.error(request, "Error scheduling trial. Please check your inputs.")
+            messages.error(request, "Invalid form data")
+
     else:
         form = ScheduleTrial()
 
-    return render(request, 'schedule_trial.html', {'form': form})
+    return render(request, 'schedule_trial.html', {'form': form, 'trial': trial})
+
+
+def reject_schedule(request, id):
+    schedule = get_object_or_404(Schedule, id=id)  # Fetch the schedule entry using ID
+
+    if request.method == "POST":
+        reason = request.POST.get("reason")  # Get the rejection reason from the form
+        schedule.status = "Rejected"
+        schedule.rejection_reason = reason  # Ensure this field exists in your model
+        schedule.save()
+
+        return redirect("view_schedule")  # Redirect to the schedule view page
+
+    return render(request, "reject_schedule.html", {"schedule": schedule})
+    
+
+def view_trial_schedule(request):
+    schedules = Schedule.objects.all()
+    return render(request, 'view_trial_schedule.html', {'schedules': schedules})

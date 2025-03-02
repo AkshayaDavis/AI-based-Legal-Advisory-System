@@ -1,0 +1,49 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/view_trial_schedule.css' %}">
+
+<div class="trial-details-container">
+    <h2>Trial Schedule Details</h2>
+    
+    <table>
+        <tr>
+            <th>Client Name</th>
+            <td>{{ trial.booking.user.first_name }}</td>
+        </tr>
+        <tr>
+            <th>Client Email</th>
+            <td>{{ trial.booking.user.email }}</td>
+        </tr>
+        <tr>
+            <th>Case Abstract</th>
+            <td>
+                {% if trial.booking.content %}
+                    <a href="{{ trial.booking.content.url }}" download>Download</a>
+                {% else %}
+                    No file uploaded
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>Trial Status</th>
+            <td style="color: green; font-weight: bold;">{{ trial.status }}</td>
+        </tr>
+        <tr>
+            <th>Scheduled Date</th>
+            <td>{{ trial.schedule.date }}</td>
+        </tr>
+        <tr>
+            <th>Time</th>
+            <td>{{ trial.schedule.time }}</td>
+        </tr>
+        <tr>
+            <th>Jury Assigned</th>
+            <td>{{ trial.schedule.jury }}</td>
+        </tr>
+    </table>
+    
+    <a href="{% url 'trial_list' %}" class="btn back-btn">Back to Trials</a>
+</div>
+
+{% include 'footer.html' %}

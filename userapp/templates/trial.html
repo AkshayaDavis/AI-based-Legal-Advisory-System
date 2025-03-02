@@ -34,7 +34,14 @@
                             {% if trial.status == 'Requested' %}
                             <p>Requested</p>
                             {% elif trial.status == 'Approved' %}
-                            <p>Approved</p>
+                                <p><span style="color: green; font-weight: bold;">Approved & Scheduled</span></p>
+
+                                {% for schedule in schedules %}
+                                    {% if schedule.trial.id == trial.id %}
+                                        <a href="{% url 'view_trial_schedule' schedule.id %}" class="btn trial-btn">View Trial Schedule</a>
+                                    {% endif %}
+                                {% endfor %}
+
                             <a href="" class="btn trial-btn">View Trial Schedule</a>
                             {% else %}
                             {{ trial.status }}
