@@ -561,3 +561,5 @@ def reject_trial(request, id):
             send_mail(subject, message, email_from, email_to)
             return redirect('view_trial')
     return render(request, 'reject_trial.html', {'trial': trial})
+
+

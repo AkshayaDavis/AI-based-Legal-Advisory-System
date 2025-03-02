@@ -20,10 +20,15 @@ class Jury(models.Model):
     phone = models.CharField(max_length=50, null=True)
     specialization = models.CharField(max_length=50, null=True)
 
+    def __str__(self):
+        return self.name
+
 class Schedule(models.Model):
+    trial = models.ForeignKey(Law, on_delete=models.CASCADE,null=True, related_name='trial_schedule')
     jury = models.ForeignKey(Jury, on_delete=models.CASCADE,null=True, related_name='jury_schedule')
     scheduled_date = models.DateField(null=True)
     scheduled_time = models.TimeField(null=True)
     status = models.CharField(max_length=50, default="Pending")
+    reject_reason = models.TextField(max_length=100000, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

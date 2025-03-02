@@ -29,18 +29,22 @@
                     {% endif %}
                 </td>
                 <td>
+                    
                     {% if trial.status == "Requested" %}
                         <a href="{% url 'approve_trial' trial.id %}" class="btn approve-btn">Approve</a>
-                        <a href="{% url 'reject_trial' trial.id %}" class="btn reject-btn">Reject</a>
-
+                        <a href="{% url 'reject_schedule' trial.id %}" class="btn reject-btn">Reject</a>
+                
                     {% elif trial.status == "Approved" %}
-                        <a href="{% url 'schedule_trial' %}" class="btn schedule-btn">Schedule Trial</a>
+                        <a href="{% url 'schedule_trial' trial.id %}" class="btn schedule-btn">Schedule Trial</a>
 
                     {% elif trial.status == "Rejected" %}
-                    <span style="color: red; font-weight: bold;">Trial rejected</span>
-
+                        <span style="color: red; font-weight: bold;">Trial Rejected</span>
+                
+                    {% elif trial.schedule.status == "Scheduled" %}
+                        <span style="color: green; font-weight: bold;">Scheduled</span>
+                
                     {% endif %}
-                </td>
+                </td>                
             </tr>
         {% endfor %}
         </tbody>

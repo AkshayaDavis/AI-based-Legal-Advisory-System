@@ -1,0 +1,55 @@
+.trial-details-container {
+    width: 60%;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.trial-details-container h2 {
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+th {
+    background: #f4f4f4;
+    text-align: left;
+}
+
+td {
+    text-align: left;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+.back-btn {
+    background: #555;
+}
+
+.back-btn:hover {
+    background: #333;
+}

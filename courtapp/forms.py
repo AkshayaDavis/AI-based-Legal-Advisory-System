@@ -139,21 +139,19 @@ class ScheduleTrial(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ScheduleTrial, self).__init__(*args, **kwargs)
         
-        # Fetch court names from the Register model (assuming courts are stored with usertype='court')
-        jury_choices = Jury.objects.filter(usertype="jury").values_list('id', 'name')
+        # Fetch Jury choices dynamically
+        jury_choices = Jury.objects.all().values_list('id', 'name')
         
         # Set choices dynamically
-        self.fields['name'] = forms.ChoiceField(
-            choices=jury_choices,
-            widget=forms.Select(attrs={'class': 'form-control'})
-        )
+        self.fields['jury'].queryset = Jury.objects.all()
+
     class Meta:
         model = Schedule
-        fields = [ 'jury', 'scheduled_date', 'scheduled_time']
+        fields = ['jury', 'scheduled_date', 'scheduled_time']
         widgets = {
-            'jury': forms.Select(attrs={'id': 'jury', 'name': 'jury'}),
-            'scheduled_date': forms.DateInput(attrs={'id': 'scheduled_date', 'name': 'scheduled_date', 'type': 'date'}),
-            'scheduled_time': forms.TimeInput(attrs={'id': 'scheduled_time', 'name': 'scheduled_time', 'type': 'time'}),
+            'jury': forms.Select(attrs={'class': 'form-control'}),
+            'scheduled_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'scheduled_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
         }
         labels = {
             'jury': 'Jury',
@@ -164,4 +162,18 @@ class ScheduleTrial(forms.ModelForm):
             'jury': '',
             'scheduled_date': '',
             'scheduled_time': '',
+        }
+
+class RejectScheduleTrial(forms.ModelForm):
+    class Meta:
+        model = Schedule
+        fields = ['reject_reason']
+        widgets = {
+            'reject_reason': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+        labels = {
+            'reject_reason': 'Reason for Rejection',
+        }
+        help_texts = {
+            'reject_reason': '',
         }

@@ -5,14 +5,13 @@
 
 <div class="container">
     <h2 class="heading">Schedule Trial</h2>
-    <form method="post" class="schedule-form">
+    <form method="POST">
         {% csrf_token %}
-
         <div class="form-group">
-            <label for="jury">Jury</label>
-            {{ form.name }}
+            <label for="jury">{{ form.jury.label }}</label>
+            {{ form.jury }}
         </div>
-
+        
         <div class="form-group">
             <label for="scheduled_date">Scheduled Date</label>
             {{ form.scheduled_date }}
