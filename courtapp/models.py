@@ -24,7 +24,7 @@ class Jury(models.Model):
         return self.name
 
 class Schedule(models.Model):
-    trial = models.ForeignKey(Law, on_delete=models.CASCADE,null=True, related_name='trial_schedule')
+    trial = models.ForeignKey(Trial, on_delete=models.CASCADE,null=True, related_name='trial_schedule')
     jury = models.ForeignKey(Jury, on_delete=models.CASCADE,null=True, related_name='jury_schedule')
     scheduled_date = models.DateField(null=True)
     scheduled_time = models.TimeField(null=True)

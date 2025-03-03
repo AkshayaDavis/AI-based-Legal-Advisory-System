@@ -108,7 +108,13 @@ def schedule_trial(request, id):
         if form.is_valid():
             schedule = form.save(commit=False)
             schedule.status = "Scheduled"
+            schedule.trial = trial
             schedule.save()
+
+            # Update trial status
+            trial.status = "Scheduled"
+            trial.save()
+
             messages.success(request, "Trial scheduled successfully")
             return redirect('view_trial')  # Redirect to trial listing page
         else:
@@ -120,8 +126,9 @@ def schedule_trial(request, id):
     return render(request, 'schedule_trial.html', {'form': form, 'trial': trial})
 
 
+
 def reject_schedule(request, id):
-    schedule = get_object_or_404(Schedule, id=id)  # Fetch the schedule entry using ID
+    schedule = Trial.objects.get(id=id)  # Fetch the schedule entry using ID
 
     if request.method == "POST":
         reason = request.POST.get("reason")  # Get the rejection reason from the form
@@ -129,11 +136,12 @@ def reject_schedule(request, id):
         schedule.rejection_reason = reason  # Ensure this field exists in your model
         schedule.save()
 
-        return redirect("view_schedule")  # Redirect to the schedule view page
+        return redirect("view_trial")  # Redirect to the schedule view page
 
     return render(request, "reject_schedule.html", {"schedule": schedule})
     
 
-def view_trial_schedule(request):
-    schedules = Schedule.objects.all()
-    return render(request, 'view_trial_schedule.html', {'schedules': schedules})
+def view_trial_schedule(request, id):
+    trial = get_object_or_404(Schedule, id=id)
+    schedules = trial.schedule_set.all()
+    return render(request, "view_trial_schedule.html", {"schedules": schedules, "trial": trial})

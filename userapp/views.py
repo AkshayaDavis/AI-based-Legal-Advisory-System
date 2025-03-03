@@ -327,6 +327,21 @@ def delete_court(request,id):
     messages.success(request,'court deleted successfully',extra_tags='success')
     return redirect('view_court')
 
+def edit_court(request,id):
+    court = get_object_or_404(Register, id=id)
+    if request.method == 'POST':
+        form = EditCourtForm(request.POST, instance=court)
+        if form.is_valid():
+            court = form.save(commit=False)
+            court.save()
+            messages.success(request, "Court updated successfully", extra_tags="success")
+            return redirect('view_court')
+        else:
+            messages.error(request, "Invalid form data", extra_tags="error")
+    else:
+        form = EditCourtForm(instance=court)
+    return render(request, 'court_reg.html', {'form': form})
+
 
 def lawyer_profileview(request):
     query = request.GET.get('q', '')  # Get search query
@@ -537,7 +552,7 @@ def approve_trial(request, id):
     trial.status = "Approved"
     trial.save()
     messages.success(request, "Trial approved successfully", extra_tags="success")
-    return redirect('trial')
+    return redirect('view_trial')
 
 
 def delete_trial(request, id):
@@ -545,7 +560,6 @@ def delete_trial(request, id):
     trial.delete()
     messages.success(request, "Trial deleted successfully", extra_tags="success")
     return redirect('trial')
-
 
 
 def reject_trial(request, id):
@@ -561,5 +575,3 @@ def reject_trial(request, id):
             send_mail(subject, message, email_from, email_to)
             return redirect('view_trial')
     return render(request, 'reject_trial.html', {'trial': trial})
-
-

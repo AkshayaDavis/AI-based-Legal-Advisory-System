@@ -35,12 +35,17 @@
                         <a href="{% url 'reject_schedule' trial.id %}" class="btn reject-btn">Reject</a>
                 
                     {% elif trial.status == "Approved" %}
-                        <a href="{% url 'schedule_trial' trial.id %}" class="btn schedule-btn">Schedule Trial</a>
+                        {% if trial.trial_schedule.all %}  
+                            <span style="color: green; font-weight: bold;">Scheduled Successfully</span>
+                        {% else %}
+                            <a href="{% url 'schedule_trial' trial.id %}" class="btn schedule-btn">Schedule Trial</a>
+                        {% endif %}
+                    
 
                     {% elif trial.status == "Rejected" %}
                         <span style="color: red; font-weight: bold;">Trial Rejected</span>
                 
-                    {% elif trial.schedule.status == "Scheduled" %}
+                    {% elif trial.status == "Scheduled" %}
                         <span style="color: green; font-weight: bold;">Scheduled</span>
                 
                     {% endif %}
