@@ -29,28 +29,42 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% for trial in trials %}
-                        {% if trial.booking.id == booking.id %}
-                            {% if trial.status == 'Requested' %}
-                            <p>Requested</p>
-                            {% elif trial.status == 'Approved' %}
-                                <p><span style="color: green; font-weight: bold;">Approved & Scheduled</span></p>
-
-                                {% for schedule in schedules %}
-                                    {% if schedule.trial.id == trial.id %}
-                                        <a href="{% url 'view_trial_schedule' schedule.id %}" class="btn trial-btn">View Trial Schedule</a>
+                    {% with None as trial_found %}
+                        {% for trial in trials %}
+                            {% if trial.booking.id == booking.id %}
+                                {% with trial as trial_found %}
+                                    {% if trial.status == 'Requested' %}
+                                        <p>Requested</p>
+                                    {% elif trial.status == 'Approved' %}
+                                        <p><span style="color: green; font-weight: bold;">Approved & Scheduled</span></p>
+                
+                                        {% with None as schedule_found %}
+                                            {% for schedule in schedules %}
+                                                {% if schedule.trial.id == trial.id %}
+                                                    {% with schedule as schedule_found %}
+                                                        <a href="{% url 'view_trial_schedule' schedule.id %}" class="btn trial-btn">View Trial Schedule</a>
+                                                    {% endwith %}
+                                                {% endif %}
+                                            {% endfor %}
+                
+                                            {% if not schedule_found %}
+                                                <a href="{% url 'add_request_trial' booking.id %}" class="btn trial-btn">⚖ Request for Trial</a>
+                                            {% endif %}
+                                        {% endwith %}
+                                    
+                                    {% elif trial.status == 'Scheduled' %}
+                                        <a href="{% url 'view_trial_schedule' trial.id %}" class="btn trial-btn">View Schedule</a>
+                                        <p style="color: green; font-weight: bold;">Scheduled your request.</p>
                                     {% endif %}
-                                {% endfor %}
-
-                            <a href="" class="btn trial-btn">View Trial Schedule</a>
-                            {% else %}
-                            {{ trial.status }}
-                            <a href="{% url 'add_request_trial' booking.id %}" class="btn trial-btn">⚖ Request for Trial</a>
+                                {% endwith %}
                             {% endif %}
+                        {% endfor %}
+                
+                        {% if not trial_found %}
+                            <a href="{% url 'add_request_trial' booking.id %}" class="btn trial-btn">⚖ Request for Trial</a>
                         {% endif %}
-                    {% endfor %}
-                    
-                </td>
+                    {% endwith %}
+                </td>                
             </tr>
         {% endfor %}
         </tbody>
@@ -59,4 +73,5 @@
     <p style="text-align: center; margin-top: 20px;">No approved bookings found.</p>
     {% endif %}
 </div>
+
 {% include 'footer.html' %}

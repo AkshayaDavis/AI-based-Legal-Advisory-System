@@ -18,10 +18,12 @@
             <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
                 <td>{{ user.court_jurisdiction }}</td>
                 <td>{{ user.court_type }}</td>
                 <td>{{ user.place }}</td>
                 <td><button><div class="delete-btn"><a href="{% url 'delete_court' user.id %}">Delete</a></div></button></td>
+                
             </tr>
             {% endfor %}
         {% else %}

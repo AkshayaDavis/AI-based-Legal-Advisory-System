@@ -42,6 +42,8 @@ urlpatterns = [
 
     path('delete_court/<int:id>/',views.delete_court,name="delete_court"),
 
+    path('edit_court',views.edit_court,name="edit_court"),
+
     path('lawyer_profileview',views.lawyer_profileview,name="lawyer_profileview"),
 
     path('court_profile',views.court_profile,name="court_profile"),
