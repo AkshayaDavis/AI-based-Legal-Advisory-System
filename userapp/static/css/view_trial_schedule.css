@@ -53,3 +53,38 @@ td {
 .back-btn:hover {
     background: #333;
 }
+/* Common Button Styles */
+.trial-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.edit-btn, .delete-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Edit Button */
+.edit-btn {
+    background-color: #ffc107; /* Yellow */
+    color: black;
+    margin-right: 10px;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+/* Delete Button */
+.delete-btn {
+    background-color: #dc3545; /* Red */
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}

@@ -9,17 +9,17 @@
     <table>
         <tr>
             <th>Client Name</th>
-            <td>{{ schedules.trial.booking.user.first_name }}</td>
+            <td>{{ schedules.trial.lawyer.first_name }}</td>
         </tr>
         <tr>
             <th>Client Email</th>
-            <td>{{ schedules.trial.booking.user.email }}</td>
+            <td>{{ schedules.trial.lawyer.email }}</td>
         </tr>
         <tr>
             <th>Case Abstract</th>
             <td>
                 {% if schedules.trial.booking.content %}
-                    <a href="{{ trial.booking.content.url }}">View</a>
+                    <a href="{{ schedules.trial.booking.content.url }}" target="_blank">View</a>
                 {% else %}
                     No file uploaded
                 {% endif %}
@@ -42,7 +42,12 @@
             <td>{{ schedules.jury.name }}</td>
         </tr>
     </table>
-    
+
+    <!-- Buttons for Edit & Delete -->
+    <div class="trial-actions">
+        <a href="{% url 'edit_trial_schedule' schedules.id %}" class="edit-btn">Edit</a>
+        <a href="{% url 'delete_trial_schedule' schedules.id %}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this schedule?');">Delete</a>
+    </div>
 </div>
 
 {% include 'footer1.html' %}

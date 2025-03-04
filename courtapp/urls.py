@@ -23,4 +23,10 @@ urlpatterns = [
     path('reject_schedule/<int:id>/',views.reject_schedule,name="reject_schedule"),
 
     path('view_trial_schedule/<int:id>/',views.view_trial_schedule,name="view_trial_schedule"),
+
+    path('edit_trial_schedule/<int:id>/',views.edit_trial_schedule,name="edit_trial_schedule"),
+
+    path('delete_trial_schedule/<int:id>/',views.delete_trial_schedule,name="delete_trial_schedule"),
+
+    path('schedule_page/<int:id>/',views.schedule_page,name="schedule_page"),
 ]
