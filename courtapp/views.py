@@ -142,6 +142,37 @@ def reject_schedule(request, id):
     
 
 def view_trial_schedule(request, id):
-    trial = get_object_or_404(Schedule, id=id)
-    schedules = trial.schedule_set.all()
-    return render(request, "view_trial_schedule.html", {"schedules": schedules, "trial": trial})
+    trial = Trial.objects.get(id=id)
+    schedules = Schedule.objects.get(trial=trial)
+    return render(request, "view_trial_schedule.html", {"schedules": schedules})
+
+def edit_trial_schedule(request, id):
+    schedule = Schedule.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = ScheduleTrial(request.POST, instance=schedule)
+        if form.is_valid():
+            schedule = form.save(commit=False)
+            schedule.status = "Scheduled"
+            schedule.save()
+
+            messages.success(request, "Trial schedule updated successfully")
+            return redirect('view_trial')  # Redirect to trial listing page
+        else:
+            messages.error(request, "Invalid form data")
+
+    else:
+        form = ScheduleTrial(instance=schedule)
+
+    return render(request, 'schedule_trial.html', {'form': form, 'schedule': schedule})
+
+def delete_trial_schedule(request, id):
+    schedule = Schedule.objects.get(id=id)
+    schedule.delete()
+    messages.success(request, "Trial schedule deleted successfully")
+    return redirect('view_trial')  # Redirect to trial listing page
+
+def schedule_page(request, id):
+    trial = Trial.objects.get(id=id)
+    schedules = Schedule.objects.get(trial=trial)
+    return render(request, "schedule_page.html", {"schedules": schedules})
