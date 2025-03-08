@@ -8,23 +8,26 @@
     
     <table>
         <tr>
-            <th>Client Name</th>
+            <th>Lawyer Name</th>
             <td>{{ schedules.trial.lawyer.first_name }}</td>
         </tr>
         <tr>
-            <th>Client Email</th>
+            <th>Lawyer Email</th>
             <td>{{ schedules.trial.lawyer.email }}</td>
         </tr>
         <tr>
             <th>Case Abstract</th>
             <td>
                 {% if schedules.trial.booking.content %}
-                    <a href="{{ schedules.trial.booking.content.url }}" target="_blank">View</a>
+                    <a href="{{ schedules.trial.booking.content.url }}" download="{{ schedules.trial.booking.content.name }}" class="download-abstract">
+                        Download
+                    </a>
                 {% else %}
                     No file uploaded
                 {% endif %}
             </td>
         </tr>
+               
         <tr>
             <th>Trial Status</th>
             <td style="color: green; font-weight: bold;">{{ schedules.status }}</td>

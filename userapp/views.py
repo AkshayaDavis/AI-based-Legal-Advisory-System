@@ -330,7 +330,7 @@ def delete_court(request,id):
 def edit_court(request,id):
     court = get_object_or_404(Register, id=id)
     if request.method == 'POST':
-        form = EditCourtForm(request.POST, instance=court)
+        form = EditCourtProfileForm(request.POST, instance=court)
         if form.is_valid():
             court = form.save(commit=False)
             court.save()
@@ -339,8 +339,8 @@ def edit_court(request,id):
         else:
             messages.error(request, "Invalid form data", extra_tags="error")
     else:
-        form = EditCourtForm(instance=court)
-    return render(request, 'court_reg.html', {'form': form})
+        form = EditCourtProfileForm(instance=court)
+    return render(request, 'court_reg.html', {'form': form,'title':'Edit Court','button':'Update'})
 
 
 def lawyer_profileview(request):

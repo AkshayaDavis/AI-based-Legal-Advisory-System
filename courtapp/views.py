@@ -12,7 +12,6 @@ from django.db.models import Min
 from django.shortcuts import get_object_or_404
 
 
-
 def add_law(request):
     if request.method == 'POST':
         form = LawForm(request.POST)
@@ -47,7 +46,7 @@ def edit_law(request,id):
             messages.error(request, "Invalid form data", extra_tags="error")
     else:
         form = LawForm(instance=law)
-    return render(request, 'add_law.html', {'form': form})
+    return render(request, 'add_law.html', {'form': form,'title':'Edit Law','button':'Update'})
 
 def delete_law(request,id):
     law = get_object_or_404(Law, id=id)
@@ -91,7 +90,7 @@ def edit_jury(request,id):
             messages.error(request, "Invalid form data", extra_tags="error")
     else:
         form = JuryForm(instance=jury)
-    return render(request, 'add_jury.html', {'form': form})
+    return render(request, 'add_jury.html', {'form': form,'title':'Edit jury','button':'Update'})
 
 def delete_jury(request,id):
     jury = get_object_or_404(Jury, id=id)
@@ -141,10 +140,17 @@ def reject_schedule(request, id):
     return render(request, "reject_schedule.html", {"schedule": schedule})
     
 
+# def view_trial_schedule(request, id):
+#     trial = Trial.objects.get(id=id)
+#     schedules = Schedule.objects.get(trial=trial)
+#     return render(request, "view_trial_schedule.html", {"schedules": schedules})
+
+
 def view_trial_schedule(request, id):
-    trial = Trial.objects.get(id=id)
-    schedules = Schedule.objects.get(trial=trial)
+    trial = get_object_or_404(Trial, id=id)
+    schedules = Schedule.objects.filter(trial=trial)  # Use filter to fetch multiple schedules if applicable
     return render(request, "view_trial_schedule.html", {"schedules": schedules})
+
 
 def edit_trial_schedule(request, id):
     schedule = Schedule.objects.get(id=id)

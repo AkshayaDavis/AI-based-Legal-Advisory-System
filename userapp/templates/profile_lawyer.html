@@ -12,7 +12,7 @@
     <div class="profile-container">
         <div class="profile-header">
             <h1>{{ lawyer.first_name }}</h1>
-            <p class="specialization">{{ lawyer.specialization }} Law</p>
+            <p class="specialization">{{ lawyer.bio }} </p>
         </div>
         
         <div class="profile-content">
@@ -34,12 +34,13 @@
                 {% if lawyer.barcouncil_number %}
                     <p><strong>Bar Council Number:</strong> {{ lawyer.barcouncil_number }}</p>
                 {% endif %}
+                {% if lawyer.specialization %}
+                    <p><strong>specialization:</strong> {{ lawyer.specialization }}</p>
+                {% endif %}
                 {% if lawyer.qualification %}
                     <p><strong>Qualification:</strong> {{ lawyer.qualification }}</p>
                 {% endif %}
-                {% if lawyer.bio %}
-                    <p><strong>Bio:</strong> {{ lawyer.bio }}</p>
-                {% endif %}
+                
                 {% if lawyer.experience %}
                     <p><strong>Experience:</strong> {{ lawyer.experience }}</p>
                 {% endif %}
@@ -54,10 +55,7 @@
         </div>
 
         <div class="buttons">
-            <a href="{% url 'all_lawyers'  %}" class="back-btn">Back to List</a>
-            <!-- <a href="{% url 'chat' lawyer.id %}" class="message-btn">📩 Message</a> -->
-            <a href="{% url 'bookings' lawyer.id %}" class="appointment-btn">📅 Book Now</a>
-            
+            <a href="{% url 'bookings' lawyer.id %}" class="appointment-btn">📅 Request Appointment</a>
         </div>
     </div>
 

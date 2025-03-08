@@ -22,7 +22,10 @@
                 <td>{{ user.court_jurisdiction }}</td>
                 <td>{{ user.court_type }}</td>
                 <td>{{ user.place }}</td>
-                <td><button><div class="delete-btn"><a href="{% url 'delete_court' user.id %}">Delete</a></div></button></td>
+                <td>
+                    <button><div class="delete-btn"><a href="{% url 'delete_court' user.id %}">Delete</a></div></button>
+                    <button><div class="edit-button"><a href="{% url 'edit_court' user.id %}">Edit</a></div></button>
+                </td>
                 
             </tr>
             {% endfor %}
