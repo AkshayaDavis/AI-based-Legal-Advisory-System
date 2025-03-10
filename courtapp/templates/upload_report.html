@@ -1,0 +1,39 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/upload_report.css' %}">
+
+<div class="container">
+    <h2>Upload Case Report</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="upload-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="title">{{ form.title.label }}</label>
+            {{ form.title }}
+        </div>
+
+        <div class="form-group">
+            <label for="description">{{ form.description.label }}</label>
+            {{ form.description }}
+        </div>
+
+        <div class="form-group">
+            <label for="file">{{ form.file.label }}</label>
+            {{ form.file }}
+        </div>
+
+        <button type="submit" class="btn-submit">Upload</button>
+    </form>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+{% include 'footer1.html' %}

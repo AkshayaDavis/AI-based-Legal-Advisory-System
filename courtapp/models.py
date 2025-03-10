@@ -32,3 +32,12 @@ class Schedule(models.Model):
     reject_reason = models.TextField(max_length=100000, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Report(models.Model):
+    schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE,null=True, related_name='schedule_report')
+    title = models.CharField(max_length=50, null=True)
+    description = models.TextField(max_length=100000, null=True)
+    file = models.FileField(upload_to='reports/', null=True)
+    status = models.CharField(max_length=50, default="Pending")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

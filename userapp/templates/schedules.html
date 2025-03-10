@@ -1,0 +1,41 @@
+{% load static %}
+{% include 'header.html' %}
+
+<link rel="stylesheet" href="{% static 'css/view_trial_schedule.css' %}">
+
+<div class="trial-details-container">
+    <h2>Scheduled Details</h2>
+    
+    <table>
+        <tr>
+            <th>Lawyer Name</th>
+            <td>{{ schedules.trial.lawyer.first_name }}</td>
+        </tr>
+        <tr>
+            <th>Lawyer Email</th>
+            <td>{{ schedules.trial.lawyer.email }}</td>
+        </tr>
+        <tr>
+            <th>Court Name</th>
+            <td>{{ schedules.trial.court.first_name }}</td>
+        </tr>
+        <tr>
+            <th>Court Email</th>
+            <td>{{ schedules.trial.court.email }}</td>
+        </tr>
+        <tr>
+            <th>Scheduled Date</th>
+            <td>{{ schedules.scheduled_date }}</td>
+        </tr>
+        <tr>
+            <th>Time</th>
+            <td>{{ schedules.scheduled_time }}</td>
+        </tr>
+        <tr>
+            <th>Jury Assigned</th>
+            <td>{{ schedules.jury.name }}</td>
+        </tr>
+    </table>
+</div>
+
+{% include 'footer1.html' %}

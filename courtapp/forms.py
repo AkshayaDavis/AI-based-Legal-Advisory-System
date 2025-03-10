@@ -177,3 +177,30 @@ class RejectScheduleTrial(forms.ModelForm):
         help_texts = {
             'reject_reason': '',
         }
+
+
+class ReportForm(forms.ModelForm):
+    class Meta:
+        model = Report
+        fields = ['title', 'description', 'file']
+        widgets = {
+            'title': forms.TextInput(attrs={'id': 'title', 'name': 'title'}),
+            'description': forms.Textarea(attrs={'id': 'description', 'name': 'description'}),
+            'file': ClearableFileInput(attrs={'id': 'file', 'name': 'file'}),
+        }
+        labels = {
+            'title': 'Title',
+            'description': 'Description',
+            'file': 'File',
+        }
+        help_texts = {
+            'title': '',
+            'description': '',
+            'file': '',
+        }
+
+    def clean_title(self):
+        title = self.cleaned_data.get('title')
+        if not re.match(r'^[a-zA-Z0-9 ]+$', title):
+            raise ValidationError('Title should contain only alphabets and numbers')
+        return title

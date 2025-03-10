@@ -599,7 +599,7 @@ class RequestTrialForm(forms.ModelForm):
         }
         labels = {
             'content': 'Upload File',
-            'court_type': 'Court Type'
+            'court_type': 'Select Court'
         }
         help_texts = {
             'content': 'Allowed file types: PDF, PNG, JPG, DOCX, etc.',

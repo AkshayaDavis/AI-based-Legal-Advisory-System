@@ -88,3 +88,28 @@ th, td {
     color: #777;
     margin-top: 20px;
 }
+
+/* View Schedule Button */
+.schedule-btn {
+    display: inline-block;
+    background-color: #007bff; /* Blue */
+    color: white;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.schedule-btn:hover {
+    background-color: #0056b3; /* Darker Blue */
+    transform: scale(1.05);
+}
+
+.schedule-btn:active {
+    background-color: #004085;
+    transform: scale(1);
+}

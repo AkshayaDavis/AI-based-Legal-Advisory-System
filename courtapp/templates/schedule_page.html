@@ -8,23 +8,26 @@
     
     <table>
         <tr>
-            <th>Client Name</th>
+            <th>Lawyer Name</th>
             <td>{{ schedules.trial.lawyer.first_name }}</td>
         </tr>
         <tr>
-            <th>Client Email</th>
+            <th>Lawyer Email</th>
             <td>{{ schedules.trial.lawyer.email }}</td>
         </tr>
         <tr>
             <th>Case Abstract</th>
             <td>
                 {% if schedules.trial.booking.content %}
-                    <a href="{{ schedules.trial.booking.content.url }}" target="_blank">View</a>
+                    <a href="{{ schedules.trial.booking.content.url }}" download="{{ schedules.trial.booking.content.name }}" class="download-abstract">
+                        Download
+                    </a>
                 {% else %}
                     No file uploaded
                 {% endif %}
             </td>
         </tr>
+               
         <tr>
             <th>Trial Status</th>
             <td style="color: green; font-weight: bold;">{{ schedules.status }}</td>
@@ -48,6 +51,16 @@
         <a href="{% url 'edit_trial_schedule' schedules.id %}" class="edit-btn">Edit</a>
         <a href="{% url 'delete_trial_schedule' schedules.id %}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this schedule?');">Delete</a>
     </div>
+    <div class="trial-actions">
+        {% load tz %}
+        {% now "Y-m-d" as today_date %}
+        
+        {% if schedules.scheduled_date|date:"Y-m-d" <= today_date %}
+            <a href="{% url 'upload_report' schedules.id %}" class="upload-btn">Upload Report</a>
+        {% else %}
+            <button class="upload-btn disabled" disabled>Report can be uploaded only after {{ schedules.scheduled_date }}</button>
+        {% endif %}
+    </div>    
 </div>
 
 {% include 'footer1.html' %}

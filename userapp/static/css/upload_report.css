@@ -1,0 +1,71 @@
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"], textarea, input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 10px;
+    background: #018823;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #018823;
+}
+
+.messages {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.messages p {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.messages .success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.messages .error {
+    background: #f8d7da;
+    color: #721c24;
+}

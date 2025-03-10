@@ -86,13 +86,15 @@
                             {% elif request.session.ut == 'admin' %}
                             <div class="navbar-nav mr-auto">
                                 <a href="/" class="nav-item nav-link ">Home</a>
-                                <!-- Add Court Dropdown Menu -->
-                                <a href="#" class="nav-item nav-link dropdown-toggle" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Court
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="/court_reg">Add Court</a>
-                                    <a class="dropdown-item" href="/view_court">View Courts</a>
+
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" id="juryDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Court
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="juryDropdown">
+                                        <a href="/court_reg" class="dropdown-item">Add Court</a>
+                                        <a href="/view_court" class="dropdown-item">View Court</a>
+                                    </div>
                                 </div>
                                 <a href="/view_user" class="nav-item nav-link">View Users</a>
                                 <a href="/view_lawyer" class="nav-item nav-link">View Lawyers</a>
@@ -110,6 +112,7 @@
                                 <a href="/about" class="nav-item nav-link">About</a>
                                 <a href="/view_bookings" class="nav-item nav-link">Bookings</a>
                                 <a href="/trial" class="nav-item nav-link">Trials</a>
+                                <a href="/all_courts" class="nav-item nav-link">Courts List</a>
                                 <a href="/lawyer_profile" class="nav-item nav-link">My Profile</a>
                                 <!-- <a href="/view_user" class="nav-item nav-link">View Users</a> -->
                                 <a href="/user_logout" class="nav-item nav-link">Logout</a>

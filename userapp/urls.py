@@ -42,7 +42,9 @@ urlpatterns = [
 
     path('delete_court/<int:id>/',views.delete_court,name="delete_court"),
 
-    path('edit_court',views.edit_court,name="edit_court"),
+    path('edit_court/<int:id>/',views.edit_court,name="edit_court"),
+
+    path('edit_court_profile',views.edit_court_profile,name="edit_court_profile"),
 
     path('lawyer_profileview',views.lawyer_profileview,name="lawyer_profileview"),
 
@@ -91,5 +93,7 @@ urlpatterns = [
     path('reject_trial/<int:id>/',views.reject_trial,name="reject_trial"),
 
     path('delete_trial/<int:id>/',views.delete_trial,name="delete_trial"),
+
+    path('my_trials/<int:id>/',views.my_trials,name="my_trials"),
 
 ]

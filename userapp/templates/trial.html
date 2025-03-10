@@ -3,7 +3,7 @@
 
 <link rel="stylesheet" href="{% static 'css/view_bookings.css' %}">
 
-<h2 style="text-align: center; margin-top: 20px;">Request Trial</h2>
+<h2 style="text-align: center; margin-top: 20px;">Request For Trial</h2>
 
 <div class="bookings-container">
     {% if bookings %}
@@ -29,38 +29,46 @@
                     {% endif %}
                 </td>
                 <td>
+                    {% if booking.status == "Approved" %}
+                    <a href="{% url 'add_request_trial' booking.id %}" class="btn trial-btn">⚖ Request for Trial</a>
+                    
+
+                    {% endif %}
                     {% with None as trial_found %}
                         {% for trial in trials %}
                             {% if trial.booking.id == booking.id %}
                                 {% with trial as trial_found %}
-                                    {% if trial.status == 'Requested' %}
-                                        <p>Requested</p>
-                                    {% elif trial.status == 'Approved' %}
-                                        <p><span style="color: green; font-weight: bold;">Approved & Scheduled</span></p>
 
-                                        {% with None as schedule_found %}
-                                            {% for schedule in schedules %}
-                                                {% if schedule.trial.id == trial.id %}
-                                                    {% with schedule as schedule_found %}
-                                                        <a href="{% url 'view_trial_schedule' trial.id %}" class="btn trial-btn">View Trial Schedule</a>
-                                                    {% endwith %}
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endwith %}
-                                    
+                                
+                                    {% if trial.status == 'Requested' %}
+                                        <p><span style="color: rgb(80, 79, 79); font-weight: bold;">Requested</span></p>
+
+                                    {% elif trial.status == 'Approved' %}
+                                        <p><span style="color: green; font-weight: bold;">Approved but Not scheduled</span></p>
+
                                     {% elif trial.status == 'Scheduled' %}
-                                        <a href="{% url 'view_trial_schedule' trial.id %}" class="btn trial-btn">View Schedule</a>
                                         <p style="color: green; font-weight: bold;">Scheduled your request.</p>
-                                    {% elif trial.status == 'Booked' %}
+                                        <a href="{% url 'view_trial_schedule' trial.id %}" class="btn trial-btn">View Schedule</a>
+
+                                        <!-- {% for schedule in trial.trial_schedule.all %}
+                                        {% for report in schedule.schedule_report.all %}
+                                            {% if report.status == "Uploaded" %}
+                                                <br>
+                                                <span style="color: blue; font-weight: bold;">Report Uploaded</span>
+                                                <a href="{{ report.file.url }}" class="btn download-btn" download>Download Report</a>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %} -->
+                                        
+                                    {% elif trial.status == 'Rejected' %}
+                                        <p style="color: red; font-weight: bold;">Rejected</p>
+                                    {% else %}
                                         <a href="{% url 'add_request_trial' booking.id %}" class="btn trial-btn">⚖ Request for Trial</a>
                                     {% endif %}
                                 {% endwith %}
                             {% endif %}
                         {% endfor %}
-
-                        {% if not trial_found %}
-                            <a href="{% url 'add_request_trial' booking.id %}" class="btn trial-btn">⚖ Request for Trial</a>
-                        {% endif %}
+                       
                     {% endwith %}
                 </td>                
             </tr>

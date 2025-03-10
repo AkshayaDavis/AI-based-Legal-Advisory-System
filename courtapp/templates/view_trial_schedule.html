@@ -7,6 +7,7 @@
     <h2>Trial Schedule Details</h2>
     
     <table>
+        {% if schedules %}
         <tr>
             <th>Client Name</th>
             <td>{{ schedules.trial.booking.user.first_name }}</td>
@@ -19,12 +20,13 @@
             <th>Case Abstract</th>
             <td>
                 {% if schedules.trial.booking.content %}
-                    <a href="{{ trial.booking.content.url }}">View</a>
+                    <a href="{{ schedules.trial.booking.content.url }}" target="_blank">View</a>
                 {% else %}
                     No file uploaded
                 {% endif %}
             </td>
         </tr>
+        
         <tr>
             <th>Trial Status</th>
             <td style="color: green; font-weight: bold;">{{ schedules.status }}</td>
@@ -42,7 +44,9 @@
             <td>{{ schedules.jury.name }}</td>
         </tr>
     </table>
-    
+    {% else %}
+    <p style="text-align: center; margin-top: 20px;">No trial schedule found.</p>
+    {% endif %}
 </div>
 
 {% include 'footer1.html' %}

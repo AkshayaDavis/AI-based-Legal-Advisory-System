@@ -3,7 +3,7 @@
 
 <link rel="stylesheet" href="{% static 'css/all_lawyers.css' %}">
 
-<h2 class="center">Choose a Court</h2>
+<h2 class="center">Courts List</h2>
 
 <div class="lawyercontainer">
     {% for court in courts %}
@@ -26,6 +26,6 @@
     {% endfor %}
 </div>
 
-<a href="{% url 'courts_profileview' %}" class="back-button">Back</a>
+
 
 {% include 'footer.html' %}

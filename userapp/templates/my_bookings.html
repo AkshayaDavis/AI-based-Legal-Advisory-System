@@ -34,8 +34,14 @@
                 <td>
                     {% if booking.status == "Approved" %}
                         <a href="{% url 'chat' booking.lawyer.id %}" class="btn message-btn">Message Lawyer</a>
+
+                    {% elif booking.status == "Scheduled" %}
+                        <span style="color: green; font-weight: bold;">Your request is scheduled</span>
+                        <a href="{% url 'my_trials' booking.id %}" class="schedule-btn">View Schedule</a>
+
                     {% elif booking.status == "Rejected" %}
                         <span style="color: red; font-weight: bold;">Your request is rejected</span>
+
                     {% else %}
                         <!-- Optionally show some text or a disabled button -->
                         <span>Waiting for approval</span>

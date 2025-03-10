@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import *
+from courtapp.models import *
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
@@ -330,7 +331,7 @@ def delete_court(request,id):
 def edit_court(request,id):
     court = get_object_or_404(Register, id=id)
     if request.method == 'POST':
-        form = EditCourtForm(request.POST, instance=court)
+        form = EditCourtProfileForm(request.POST, instance=court)
         if form.is_valid():
             court = form.save(commit=False)
             court.save()
@@ -339,8 +340,8 @@ def edit_court(request,id):
         else:
             messages.error(request, "Invalid form data", extra_tags="error")
     else:
-        form = EditCourtForm(instance=court)
-    return render(request, 'court_reg.html', {'form': form})
+        form = EditCourtProfileForm(instance=court)
+    return render(request, 'court_reg.html', {'form': form,'title':'Edit Court','button':'Update'})
 
 
 def lawyer_profileview(request):
@@ -575,3 +576,11 @@ def reject_trial(request, id):
             send_mail(subject, message, email_from, email_to)
             return redirect('view_trial')
     return render(request, 'reject_trial.html', {'trial': trial})
+
+
+def my_trials(request,id):
+    user = request.user
+    booking = Bookings.objects.get(id=id)
+    trial = Trial.objects.get(booking=booking)
+    schedules = Schedule.objects.get(trial=trial)
+    return render(request, 'schedules.html', {'schedules': schedules})

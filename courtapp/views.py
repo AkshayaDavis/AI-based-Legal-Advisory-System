@@ -12,7 +12,6 @@ from django.db.models import Min
 from django.shortcuts import get_object_or_404
 
 
-
 def add_law(request):
     if request.method == 'POST':
         form = LawForm(request.POST)
@@ -47,7 +46,7 @@ def edit_law(request,id):
             messages.error(request, "Invalid form data", extra_tags="error")
     else:
         form = LawForm(instance=law)
-    return render(request, 'add_law.html', {'form': form})
+    return render(request, 'add_law.html', {'form': form,'title':'Edit Law','button':'Update'})
 
 def delete_law(request,id):
     law = get_object_or_404(Law, id=id)
@@ -91,7 +90,7 @@ def edit_jury(request,id):
             messages.error(request, "Invalid form data", extra_tags="error")
     else:
         form = JuryForm(instance=jury)
-    return render(request, 'add_jury.html', {'form': form})
+    return render(request, 'add_jury.html', {'form': form,'title':'Edit jury','button':'Update'})
 
 def delete_jury(request,id):
     jury = get_object_or_404(Jury, id=id)
@@ -114,6 +113,11 @@ def schedule_trial(request, id):
             # Update trial status
             trial.status = "Scheduled"
             trial.save()
+
+            book = trial.booking
+            booking = Bookings.objects.get(id=book.id)
+            booking.status = "Scheduled"
+            booking.save()
 
             messages.success(request, "Trial scheduled successfully")
             return redirect('view_trial')  # Redirect to trial listing page
@@ -141,10 +145,17 @@ def reject_schedule(request, id):
     return render(request, "reject_schedule.html", {"schedule": schedule})
     
 
+# def view_trial_schedule(request, id):
+#     trial = Trial.objects.get(id=id)
+#     schedules = Schedule.objects.get(trial=trial)
+#     return render(request, "view_trial_schedule.html", {"schedules": schedules})
+
+
 def view_trial_schedule(request, id):
     trial = Trial.objects.get(id=id)
-    schedules = Schedule.objects.get(trial=trial)
+    schedules = Schedule.objects.filter(trial=trial).first()  # Use filter to fetch multiple schedules if applicable
     return render(request, "view_trial_schedule.html", {"schedules": schedules})
+
 
 def edit_trial_schedule(request, id):
     schedule = Schedule.objects.get(id=id)
@@ -174,5 +185,30 @@ def delete_trial_schedule(request, id):
 
 def schedule_page(request, id):
     trial = Trial.objects.get(id=id)
-    schedules = Schedule.objects.get(trial=trial)
+    schedules = Schedule.objects.filter(trial=trial).first()
     return render(request, "schedule_page.html", {"schedules": schedules})
+
+
+
+def upload_report(request, id):
+    # Get the schedule object
+    schedule = get_object_or_404(Schedule, id=id)
+    trial = schedule.trial  # Get the associated trial
+
+    if request.method == 'POST':
+        form = ReportForm(request.POST, request.FILES)
+        if form.is_valid():
+            report = form.save(commit=False)
+            report.status = "Uploaded"
+            report.trial = trial  # Assign trial from schedule
+            report.save()
+
+            messages.success(request, "Report uploaded successfully")
+            return redirect('view_trial')  # Redirect to trial listing page
+        else:
+            messages.error(request, "Invalid form data")
+
+    else:
+        form = ReportForm()
+
+    return render(request, 'upload_report.html', {'form': form, 'trial': trial, 'schedule': schedule})

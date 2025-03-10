@@ -114,3 +114,34 @@ p {
 .view-btn:hover {
     background-color: #0056b3; /* Darker blue on hover */
 }
+.trial-actions {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    align-items: center; /* Align buttons properly */
+    justify-content: left; /* Align everything to the left */
+    margin-top: 20px; /* Add space above */
+}
+
+.upload-btn {
+    display: inline-block;
+    background-color: #007bff; /* Blue color */
+    color: rgb(20, 1, 1);
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.upload-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.upload-btn.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
