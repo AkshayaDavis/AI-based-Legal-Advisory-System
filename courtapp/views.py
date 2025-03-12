@@ -113,12 +113,10 @@ def schedule_trial(request, id):
             # Update trial status
             trial.status = "Scheduled"
             trial.save()
-
             book = trial.booking
             booking = Bookings.objects.get(id=book.id)
             booking.status = "Scheduled"
             booking.save()
-
             messages.success(request, "Trial scheduled successfully")
             return redirect('view_trial')  # Redirect to trial listing page
         else:
@@ -154,7 +152,10 @@ def reject_schedule(request, id):
 def view_trial_schedule(request, id):
     trial = Trial.objects.get(id=id)
     schedules = Schedule.objects.filter(trial=trial).first()  # Use filter to fetch multiple schedules if applicable
-    return render(request, "view_trial_schedule.html", {"schedules": schedules})
+    trial = get_object_or_404(Trial, id=id)
+    schedules = Schedule.objects.filter(trial=trial)  # Use filter to fetch multiple schedules if applicable
+    report = Report.objects.filter(schedule__trial=trial).first()
+    return render(request, "view_trial_schedule.html", {"schedules": schedules,"report":report})
 
 
 def edit_trial_schedule(request, id):
@@ -200,7 +201,7 @@ def upload_report(request, id):
         if form.is_valid():
             report = form.save(commit=False)
             report.status = "Uploaded"
-            report.trial = trial  # Assign trial from schedule
+            report.schedule = schedule  # Assign trial from schedule
             report.save()
 
             messages.success(request, "Report uploaded successfully")
@@ -212,3 +213,5 @@ def upload_report(request, id):
         form = ReportForm()
 
     return render(request, 'upload_report.html', {'form': form, 'trial': trial, 'schedule': schedule})
+    schedules = Schedule.objects.get(trial=trial)
+    return render(request, "schedule_page.html", {"schedules": schedules})

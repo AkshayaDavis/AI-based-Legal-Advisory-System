@@ -47,9 +47,9 @@
                     {% elif trial.status == "Scheduled" %}
                         <span style="color: green; font-weight: bold;">Scheduled</span>
                         <a href="{% url 'schedule_page' trial.id %}" class="btn view-btn">View Schedule</a>
-                        <!-- {% if report.status == "Uploaded" %}
+                        {% if report.status == "Uploaded" %}
                             <br><span style="color: blue; font-weight: bold;">Report Uploaded</span>
-                        {% endif %} -->
+                        {% endif %}
                     {% endif %}
                 </td>                                
             </tr>

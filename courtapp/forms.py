@@ -204,3 +204,4 @@ class ReportForm(forms.ModelForm):
         if not re.match(r'^[a-zA-Z0-9 ]+$', title):
             raise ValidationError('Title should contain only alphabets and numbers')
         return title
+        

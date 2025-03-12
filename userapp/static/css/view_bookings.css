@@ -95,3 +95,21 @@ th, td {
 .trial-btn:hover {
     background-color: #e68900; /* Darker orange on hover */
 }
+
+/* Download Report Button */
+.download-btn {
+    background-color: #fffb00; /* Blue */
+    color: rgb(10, 9, 9);
+    text-decoration: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
+    transition: background 0.3s ease-in-out;
+}
+
+.download-btn:hover {
+    background-color: #f4f808; /* Darker blue on hover */
+}

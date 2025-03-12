@@ -31,4 +31,5 @@ urlpatterns = [
     path('schedule_page/<int:id>/',views.schedule_page,name="schedule_page"),
 
     path('upload_report/<int:id>/',views.upload_report,name="upload_report"),
+
 ]

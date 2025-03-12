@@ -88,13 +88,11 @@ td {
 .delete-btn:hover {
     background-color: #c82333;
 }
-
-
 .upload-btn {
     display: inline-block;
     padding: 10px 20px;
-    background: #28a745; /* Green */
-    color: white;
+    background: #1a9202; /* Green */
+    color: rgb(26, 22, 22);
     text-decoration: none;
     font-weight: bold;
     border-radius: 5px;
@@ -104,11 +102,11 @@ td {
 }
 
 .upload-btn:hover {
-    background: #218838; /* Darker Green */
+    background: #f1f7f3; /* Darker Green */
 }
 
 .upload-btn.disabled {
-    background: #6c757d; /* Gray */
+    background: #d4d0d0; /* Gray */
     cursor: not-allowed;
     opacity: 0.7;
 }

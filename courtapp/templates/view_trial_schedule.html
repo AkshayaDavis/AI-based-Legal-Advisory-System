@@ -8,41 +8,43 @@
     
     <table>
         {% if schedules %}
+        {% for schedule in schedules %}  {# Looping in case of multiple schedules #}
         <tr>
             <th>Client Name</th>
-            <td>{{ schedules.trial.booking.user.first_name }}</td>
+            <td>{{ schedule.trial.booking.user.first_name }}</td>
         </tr>
         <tr>
             <th>Client Email</th>
-            <td>{{ schedules.trial.booking.user.email }}</td>
+            <td>{{ schedule.trial.booking.user.email }}</td>
         </tr>
         <tr>
             <th>Case Abstract</th>
             <td>
-                {% if schedules.trial.booking.content %}
-                    <a href="{{ schedules.trial.booking.content.url }}" target="_blank">View</a>
+                {% if schedule.trial.booking.content %}
+                    <a href="{{ schedule.trial.booking.content.url }}" target="_blank">View</a>
+                    <a href="{{ schedule.trial.booking.content.url }}" download>Download</a>
                 {% else %}
                     No file uploaded
                 {% endif %}
             </td>
         </tr>
-        
         <tr>
             <th>Trial Status</th>
-            <td style="color: green; font-weight: bold;">{{ schedules.status }}</td>
+            <td style="color: green; font-weight: bold;">{{ schedule.status }}</td>
         </tr>
         <tr>
             <th>Scheduled Date</th>
-            <td>{{ schedules.scheduled_date }}</td>
+            <td>{{ schedule.scheduled_date }}</td>
         </tr>
         <tr>
             <th>Time</th>
-            <td>{{ schedules.scheduled_time }}</td>
+            <td>{{ schedule.scheduled_time }}</td>
         </tr>
         <tr>
             <th>Jury Assigned</th>
-            <td>{{ schedules.jury.name }}</td>
+            <td>{{ schedule.jury.name }}</td>
         </tr>
+        {% endfor %}
     </table>
     {% else %}
     <p style="text-align: center; margin-top: 20px;">No trial schedule found.</p>
